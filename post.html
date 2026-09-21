@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — NOVA Journal</title>
-<meta name="description" content="About NOVA Journal and its author: why the blog exists, what it was built with, and what was learned building it for the Hex Softwares Web Development Internship.">
+<title>Post — NOVA Journal</title>
+<meta name="description" content="Read a full article on NOVA Journal.">
 <link rel="icon" href="assets/images/favicon.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
@@ -24,7 +24,7 @@
 </script>
 </head>
 <body>
-
+<div class="read-progress" role="presentation"></div>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- ===================== HEADER ===================== -->
@@ -64,107 +64,128 @@
 
 <main id="main">
 
-  <section class="section">
-    <div class="container">
-
-      <div class="section-head reveal">
-        <div>
-          <p class="eyebrow">About</p>
-          <h1 class="section-title" style="font-size:var(--fs-2xl);">About NOVA Journal</h1>
+  <!-- Shown when the ?id= parameter matches no stored post -->
+  <section class="section" id="article-missing" hidden>
+    <div class="container container-narrow">
+      <div class="empty-state">
+        <div class="art">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.3v.2"/></svg>
         </div>
-      </div>
-
-      <div class="about-layout">
-
-        <div>
-          <div class="panel panel-gradient reveal" style="margin-bottom:var(--sp-5);">
-            <div class="about-preview">
-              <img class="about-portrait" src="assets/images/author-avatar.jpg" alt="Portrait of Yongama, author of NOVA Journal" width="400" height="400" data-fallback="assets/images/fallback.jpg">
-              <div>
-                <h2 class="section-title" style="font-size:var(--fs-lg); margin-bottom:var(--sp-2);">Hi, I am Yongama</h2>
-                <p class="section-sub" style="font-size:var(--fs-sm); max-width:52ch;">
-                  An Information Systems student and emerging technology entrepreneur based in the Eastern Cape, South Africa.
-                  I write about what I am building, breaking and learning.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="article-body reveal" style="max-width:none;">
-            <h2>Why this journal exists</h2>
-            <p>NOVA Journal is where I think in public. Writing something down forces a level of clarity that reading never does — if I cannot explain an idea plainly, I do not understand it yet.</p>
-            <p>The topics I keep returning to are artificial intelligence, software development, entrepreneurship, digital innovation, education and skills development, technology in South Africa, business ideas, and creative media. They overlap more than they look like they should.</p>
-
-            <h2>What it was built for</h2>
-            <p>This site is <strong>Task 1 of the Hex Softwares Web Development Internship</strong>. The brief was a simple blog. I treated it as a chance to build something I would actually be comfortable putting my name on.</p>
-            <p>Everything runs in the browser. There is no backend, no database, no framework and no build step — posts are stored with <code>localStorage</code>, and uploaded images are resized on a <code>&lt;canvas&gt;</code> and kept as Base64 data URLs.</p>
-
-            <blockquote>Constraints are useful. Having no framework to reach for meant understanding what the browser was actually doing.</blockquote>
-
-            <h2>What I learned building it</h2>
-            <ul>
-              <li><strong>DOM manipulation</strong> — building every card, article and form state in JavaScript rather than hard-coding markup.</li>
-              <li><strong>Responsive design</strong> — a mobile-first stylesheet with a real breakpoint strategy, tested down to 320px.</li>
-              <li><strong>localStorage</strong> — persisting data, handling corrupt values, and dealing with <code>QuotaExceededError</code> without losing the user's work.</li>
-              <li><strong>Base64 image handling</strong> — <code>FileReader</code>, canvas resizing and compression, plus a fallback chain so a broken image never shows a broken icon.</li>
-              <li><strong>Form validation</strong> — inline, per-field errors that announce themselves properly instead of a single alert box.</li>
-              <li><strong>Accessibility</strong> — semantic landmarks, a focus-trapped mobile drawer, visible focus rings, and never using colour alone to signal an error.</li>
-              <li><strong>Clean UI/UX</strong> — a token-based design system so spacing, colour and motion stay consistent across every page.</li>
-            </ul>
-
-            <h2>Design inspiration</h2>
-            <p>The layout borrows ideas from publications I admire, without copying any of them:</p>
-            <ul>
-              <li><strong>Medium</strong> — generous whitespace and a comfortable reading measure.</li>
-              <li><strong>Dev.to</strong> — a friendly card grid with tags and author avatars.</li>
-              <li><strong>Hashnode</strong> — a dark-first, developer-focused aesthetic.</li>
-              <li><strong>Ghost</strong> — an editorial feel with a strong featured post.</li>
-              <li><strong>anshuopinion's Project-9-Blog-Website</strong> — a useful reference for basic blog structure in plain HTML and CSS.</li>
-            </ul>
-
-            <h2>What is next</h2>
-            <p>The obvious next steps are a real backend so posts are not trapped in one browser, proper authentication, and a Markdown editor. For now, the constraint is the point.</p>
-          </div>
-        </div>
-
-        <!-- Sidebar -->
-        <aside class="about-aside">
-          <div class="panel reveal" style="margin-bottom:var(--sp-4);">
-            <h2 class="section-title" style="font-size:var(--fs-base); margin-bottom:var(--sp-4);">Built with</h2>
-            <div class="tag-list" style="gap:var(--sp-2);">
-              <span class="tag">HTML5</span>
-              <span class="tag">CSS3</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">localStorage</span>
-              <span class="tag">FileReader</span>
-              <span class="tag">Base64</span>
-              <span class="tag">Canvas</span>
-              <span class="tag">IntersectionObserver</span>
-            </div>
-          </div>
-
-          <div class="stats reveal" id="stats" style="grid-template-columns:repeat(2,1fr); margin-bottom:var(--sp-4);">
-            <div class="stat">
-              <span class="stat-num" data-stat="posts">0</span>
-              <span class="stat-label">Articles</span>
-            </div>
-            <div class="stat">
-              <span class="stat-num" data-stat="categories">0</span>
-              <span class="stat-label">Topics</span>
-            </div>
-          </div>
-
-          <div class="panel panel-gradient reveal">
-            <h2 class="section-title" style="font-size:var(--fs-base); margin-bottom:var(--sp-2);">Get in touch</h2>
-            <p class="field-hint" style="margin-bottom:var(--sp-4);">Questions, feedback or collaboration ideas are all welcome.</p>
-            <a class="btn btn-primary btn-block btn-sm" href="contact.html" style="margin-bottom:var(--sp-2);">Contact me</a>
-            <a class="btn btn-ghost btn-block btn-sm" href="blog.html">Read the blog</a>
-          </div>
-        </aside>
-
+        <h1>Post not found</h1>
+        <p>This post may have been deleted from this browser, or the link is incorrect.</p>
+        <a class="btn btn-primary" href="blog.html">Back to all posts</a>
       </div>
     </div>
   </section>
+
+  <article id="article-root">
+    <div id="article-content">
+
+      <!-- Header -->
+      <section class="section" style="padding-bottom:0;">
+        <div class="container container-narrow">
+          <a class="read-link" href="blog.html" style="margin-bottom:var(--sp-4);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+            Back to all posts
+          </a>
+
+          <header class="article-head">
+            <div id="article-category"></div>
+            <h1 class="article-title" id="article-title">Loading…</h1>
+            <p class="hero-sub" id="article-excerpt" style="font-size:var(--fs-md); margin:0;"></p>
+          </header>
+
+          <div class="article-byline">
+            <div class="author-row">
+              <span class="avatar avatar-lg" id="article-avatar" aria-hidden="true">NJ</span>
+              <div>
+                <div class="byline-name" id="article-author"></div>
+                <div class="byline-bio" id="article-bio"></div>
+              </div>
+            </div>
+            <div id="article-meta"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cover -->
+      <section style="padding-bottom:0;">
+        <div class="container container-narrow">
+          <div class="article-cover" id="article-cover"></div>
+        </div>
+      </section>
+
+      <!-- Body -->
+      <section style="padding-top:0;">
+        <div class="container container-narrow">
+          <div class="article-body" id="article-body"></div>
+
+          <div class="tag-list" id="article-tags" style="margin-top:var(--sp-6);"></div>
+
+          <!-- Share + bookmark -->
+          <div class="share-row">
+            <span class="label">Share</span>
+            <div id="share-row" style="display:flex; gap:var(--sp-2); flex-wrap:wrap;"></div>
+            <button class="btn btn-ghost btn-sm" type="button" id="bookmark-btn" aria-pressed="false" style="margin-left:auto;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12v16l-6-4.2L6 20z"/></svg>
+              <span class="bm-label">Bookmark</span>
+            </button>
+          </div>
+
+          <!-- Previous / next -->
+          <h2 class="sr-only">Continue reading</h2>
+          <nav class="prevnext" id="prev-next" aria-label="Previous and next posts"></nav>
+        </div>
+      </section>
+
+      <!-- Comments -->
+      <section class="section" aria-labelledby="responses-heading">
+        <div class="container container-narrow">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title" id="responses-heading">Responses</h2>
+              <p class="section-sub" id="comment-count">No responses yet</p>
+            </div>
+          </div>
+
+          <form id="comment-form" class="panel" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label class="field-label" for="comment-name">Your name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="comment-name" name="name" maxlength="50" placeholder="Who is responding?" required>
+                <p class="field-error">Please enter your name.</p>
+              </div>
+              <div class="field">
+                <label class="field-label" for="comment-message">Your response <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="comment-message" name="message" maxlength="600" placeholder="Share your thoughts on this post…" required></textarea>
+                <p class="field-error">Please write a response.</p>
+                <p class="field-hint">Responses are stored in your browser only — nothing is sent to a server.</p>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Post response</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="comment-list" id="comment-list"></div>
+        </div>
+      </section>
+
+      <!-- Related -->
+      <section class="section" id="related-section" aria-labelledby="related-heading">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <h2 class="section-title" id="related-heading">Related Posts</h2>
+              <p class="section-sub">More from the journal.</p>
+            </div>
+          </div>
+          <div class="grid grid-3" id="related-posts"></div>
+        </div>
+      </section>
+
+    </div>
+  </article>
 
 </main>
 
