@@ -136,8 +136,9 @@
 
       form.reset();
       showAlert('success',
-        'Thanks ' + '— your message has been recorded in this browser. ' +
-        'This is a front-end demo, so nothing was emailed or sent to a server.');
+        'Thanks — your message has been recorded in this browser. ' +
+        'This is a front-end demo, so nothing was actually sent. ' +
+        'To reach me directly, email goso.yonga@gmail.com.');
       UI.toast('Message received. Thank you for reaching out!', 'success');
     }, 600);
   }
