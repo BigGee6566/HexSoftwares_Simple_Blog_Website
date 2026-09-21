@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — HexSoftwares Blog</title>
+  <meta name="description" content="Get in touch through the contact form.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Hex<span class="dot">.</span>Blog</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-close" aria-label="Close menu">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="blog.html">Blog Posts</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h1 class="page-title">Contact</h1>
+
+    <div class="prose" style="margin-bottom: var(--space-xl);">
+      <p>Have a question, feedback, or just want to say hello? Fill out the form below. This is a front-end-only demo &mdash; no data is sent anywhere.</p>
+    </div>
+
+    <div class="form-section" style="max-width: 640px;">
+      <form id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" name="name" required placeholder="Your full name">
+          <p class="field-error" id="name-error">Please enter your name.</p>
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" name="email" required placeholder="you@example.com">
+          <p class="field-error" id="email-error">Please enter a valid email address.</p>
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" required placeholder="Write your message here..."></textarea>
+          <p class="field-error" id="message-error">Please enter a message.</p>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <div class="form-success" id="contact-success">
+          Your message has been received. Thank you for reaching out!
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Hex Softwares Web Development Internship &mdash; Task 1</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
