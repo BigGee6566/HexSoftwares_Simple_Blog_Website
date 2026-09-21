@@ -212,7 +212,7 @@ Referenced, not copied — **Medium** (reading experience), **Dev.to** (card gri
 | GitHub | [github.com/BigGee6566](https://github.com/BigGee6566) |
 | LinkedIn | [Yongama Goso](https://www.linkedin.com/in/yongama-goso-85aaaa2b0) |
 | Facebook | [facebook.com/yongama.ow.gee](https://www.facebook.com/yongama.ow.gee) |
-| Portfolio | [biggee6566.github.io/BigGee6566](https://biggee6566.github.io/BigGee6566/) |
+| Portfolio | [biggee6566.github.io/Yongama-Goso](https://biggee6566.github.io/Yongama-Goso/) |
 | Location | Eastern Cape, South Africa |
 
 ## Submission
