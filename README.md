@@ -203,6 +203,18 @@ Last run: **149 passed, 0 failed, 0 console errors.** The suite is a development
 
 Referenced, not copied — **Medium** (reading experience), **Dev.to** (card grid and tags), **Hashnode** (dark developer aesthetic), **Ghost** (editorial featured layout), and [anshuopinion/Project-9-Blog-Website](https://github.com/anshuopinion/10-Practice-Project-Html-CSS/tree/Project-9-Blog-Website/Project%209) (basic blog structure reference).
 
+## Contact
+
+| | |
+|---|---|
+| Email | [goso.yonga@gmail.com](mailto:goso.yonga@gmail.com) |
+| Phone | [069 768 7985](tel:+27697687985) |
+| GitHub | [github.com/BigGee6566](https://github.com/BigGee6566) |
+| LinkedIn | [Yongama Goso](https://www.linkedin.com/in/yongama-goso-85aaaa2b0) |
+| Facebook | [facebook.com/yongama.ow.gee](https://www.facebook.com/yongama.ow.gee) |
+| Portfolio | [biggee6566.github.io/BigGee6566](https://biggee6566.github.io/BigGee6566/) |
+| Location | Eastern Cape, South Africa |
+
 ## Submission
 
 1. Create a GitHub repository named **`HexSoftwares_Simple_Blog_Website`**

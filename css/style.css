@@ -1628,6 +1628,23 @@ textarea.tall { min-height: 300px; }
 .footer-col a { color: var(--text-muted); font-size: var(--fs-sm); }
 .footer-col a:hover { color: var(--accent); }
 
+/* Email / phone sit above the icon row in the footer's Connect column */
+.footer-contact {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+}
+
+.footer-contact a {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.footer-contact a:hover { color: var(--accent); }
+
 .social-row { display: flex; gap: var(--sp-2); }
 
 .social-row a {
