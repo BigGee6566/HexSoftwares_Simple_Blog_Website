@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — HexSoftwares Blog</title>
+  <meta name="description" content="About this blog project and the Hex Softwares Web Development Internship.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Hex<span class="dot">.</span>Blog</a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+      <nav class="site-nav" aria-label="Primary">
+        <button class="nav-close" aria-label="Close menu">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="blog.html">Blog Posts</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h1 class="page-title">About This Project</h1>
+
+    <div class="prose">
+      <p>This blog was built as <strong>Task 1</strong> of the <strong>Hex Softwares Web Development Internship</strong>. The goal was to create a responsive, multi-page blog website using only HTML, CSS, and vanilla JavaScript &mdash; no frameworks, no libraries, no build tools.</p>
+
+      <div class="highlight-box">
+        <p>Four pages, one shared stylesheet, one script file, and localStorage for persistence. That is the entire stack.</p>
+      </div>
+
+      <p>The site consists of four pages linked together through a shared navigation bar: a <strong>Home</strong> page with a hero section and the three most recent posts, a <strong>Blog Posts</strong> page where you can read all entries and publish new ones, this <strong>About</strong> page, and a <strong>Contact</strong> page with a client-side validated form.</p>
+
+      <p>Blog posts are stored in the browser using <code>localStorage</code>. That means posts persist across page reloads within the same browser, but they are not shared across devices or sent to any server. If localStorage is empty on first visit, three sample posts are seeded automatically so the page is never blank.</p>
+
+      <p>The design follows a teal-and-cream colour palette with the DM Serif Display typeface for headings and Outfit for body text. It is fully responsive, adapting from mobile to desktop with a hamburger menu on smaller screens.</p>
+
+      <p>Built by <strong>Yongama</strong>, a student at the University of Fort Hare, Eastern Cape, South Africa.</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Hex Softwares Web Development Internship &mdash; Task 1</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
