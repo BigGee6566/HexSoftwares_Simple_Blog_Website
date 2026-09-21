@@ -1,73 +1,150 @@
 <div align="center">
   <img src="assets/images/nova-journal-logo.png" alt="NOVA Journal" width="420">
   <h1>NOVA Journal</h1>
-  <p><strong>Ideas, technology, and stories shaping the future.</strong></p>
-  <p>A modern, responsive blog platform built with nothing but HTML5, CSS3 and vanilla JavaScript.</p>
+  <p><strong>Notes from building software, and the business questions that come with it.</strong></p>
+  <p>A technology and creativity publication built with HTML5, CSS3 and vanilla JavaScript — no framework, no backend, no build step.</p>
 </div>
 
 ---
 
 ## Task
 
-Built for the **Hex Softwares Pvt. Ltd. Web Development Internship — Task 1** ("Simple Blog Website").
+Built for the **Hex Softwares Web Development Internship — Task 1** ("Simple Blog Website").
 
-The brief asked for a basic responsive blog. NOVA Journal treats it as a real product: a six-page publication with image uploads, search, filtering, dark mode, a single-post reading view, and a full create-post editor — with no framework, no backend and no build step.
+Created by **Yongama Goso**, an Information Systems student, emerging software developer and technology entrepreneur from South Africa.
 
-## Live features
+## Topics
 
-| Area | What it does |
-|------|--------------|
-| **Home** | Animated mesh-gradient hero, featured post, latest posts grid, topic chips, live stats, about preview, newsletter signup |
-| **Blog listing** | Live search, category filter chips with counts, sort (newest / oldest / A–Z / Z–A), "Load more" pagination, bookmark + delete per card |
-| **Single post** | Large featured image, full article rendering, reading-progress bar, share buttons (X, LinkedIn, Facebook, copy link), bookmark, tags, related posts, prev/next navigation, local comments |
-| **Create post** | Image upload *or* image URL, canvas resize + compression, live preview panel, character counters, auto reading-time, per-field validation, quota-safe saving |
-| **About** | Author bio, tech-stack tags, live article stats, what-I-learned and design-inspiration sections |
-| **Contact** | Validated front-end-only contact form, contact info cards, social links |
-| **Everywhere** | Dark/light theme toggle, sticky blurred header, mobile drawer with focus trap, scroll reveals, toasts, scroll-to-top, skip link |
+| Topic | Covers |
+|---|---|
+| Artificial Intelligence | AI tools, trends, ethics, and practical applications |
+| Software Development | Coding, web development, databases, debugging, and project building |
+| Entrepreneurship | Business ideas, innovation, startup lessons, and personal development |
+| Digital Innovation | Technology solutions that improve how people learn, work, and access opportunities |
+| Education and Skills | Digital literacy, learning resources, and career development |
+| Creative Technology | Content creation, design, media, and the connection between creativity and technology |
 
-## Technologies
+---
 
-- **HTML5** — semantic landmarks, correct heading order, labelled form controls
-- **CSS3** — custom properties, Grid, Flexbox, `aspect-ratio`, `backdrop-filter`, `color-mix`, mobile-first media queries
-- **Vanilla JavaScript (ES5-compatible)** — no libraries, no bundler
-- **localStorage** — post, bookmark, comment, newsletter and message persistence
-- **FileReader API** — reading uploaded image files
-- **Canvas API** — resizing and compressing images before storage
-- **Base64 data URLs** — storing uploaded images inline
-- **IntersectionObserver** — performant scroll-reveal animations
+## Feature accuracy
+
+Everything below was verified against the actual code in this repository.
+
+### Implemented (works fully, client-side)
+
+**Home (`index.html`)**
+- Editorial hero with publication masthead and the NOVA orbital mark
+- **Featured Editorial** — newest post flagged `featured: true`, falling back to the newest post overall
+- **Latest Articles** — three most recent posts, excluding whatever is already featured, each with a bookmark button
+- **Explore Our Topics** — six topics rendered as a ruled index with live article counts
+- Author preview and newsletter form
+
+**Blog listing (`blog.html`)**
+- Live search across title, excerpt, body, author, topic and tags (debounced)
+- Topic filter chips with live counts, plus a **Saved** bookmarks view
+- Sort: Newest, Oldest, Title A–Z, Title Z–A
+- "Load more" pagination in pages of six
+- Per-card bookmark and delete (delete behind a focus-trapped confirmation dialog)
+- Distinct empty states for no posts, no search matches, and no saved articles
+- Press <kbd>/</kbd> to jump to the search box
+
+**Single article (`post.html`)**
+- Renders by `?id=` from the query string; unknown IDs show a "Post not found" state
+- Breadcrumbs (Home / Blog / Topic / Article)
+- Reading-progress bar, reading time, tags, scroll-to-top
+- Share to X, LinkedIn, Facebook, and copy-link with toast confirmation
+- Bookmark toggle, previous/next navigation, related articles by topic
+- Comment form with validation
+
+**Create post (`create-post.html`)**
+- Image upload via `FileReader` **or** image URL, with live preview and removal
+- Canvas resize to a maximum width of 1200px, JPEG compression at quality 0.82
+- Character counters, live word counter, auto-calculated reading time (editable)
+- Per-field validation, including rejecting future dates
+- Live preview panel showing the card as it will appear
+- Unique IDs from `Date.now()` plus a random suffix
+
+**Global**
+- Dark and light themes, applied before first paint to avoid a flash
+- Sticky header with backdrop blur on scroll
+- Mobile drawer with `aria-expanded`, focus trap, Escape to close, click-outside to close
+- Skip-to-content link, visible focus rings, `prefers-reduced-motion` and `prefers-contrast` support
+- Toasts, scroll reveals, page-load fade
+
+### Simulated with localStorage (no server involved)
+
+These features work and persist, but only inside the browser that created them. Nothing is transmitted anywhere.
+
+| Feature | Key |
+|---|---|
+| Blog posts | `hexsoftwares_blog_posts` |
+| Theme preference | `hexsoftwares_theme` |
+| Bookmarks | `hexsoftwares_bookmarks` |
+| Comments | `hexsoftwares_comments` |
+| Newsletter sign-ups | `hexsoftwares_newsletter_subscribers` |
+| Contact messages | `hexsoftwares_contact_messages` |
+
+- **The contact form does not send email.** It validates, shows a success message and stores the entry locally.
+- **The newsletter has no mailing list behind it.** It validates, blocks duplicates and stores locally.
+- **Comments are per-browser.** They are not shared between visitors.
+- Data written by an earlier version under `nova_*` keys, or using the older `Education` / `Entertainment` topic names, is migrated automatically on load.
+
+### Requires manual testing
+
+Automated checks run in headless Chromium only. These need a human:
+
+- Real-device testing on iOS Safari and Android Chrome
+- Screen-reader passes (NVDA, VoiceOver) beyond the structural checks below
+- Uploading a genuinely large photo from a phone camera to trigger the ~2MB warning and quota path
+- Filling browser storage to its real limit
+- Printing an article to confirm the print stylesheet
+- Confirming the share links post correctly once the site is on a public URL (they share `window.location.href`, which is `localhost` during development)
+
+### Future upgrades
+
+- A backend (Node + Express, or Supabase/Firebase) so posts are not limited to one browser
+- User authentication and an admin dashboard
+- A Markdown editor with split-pane preview
+- Cloud image uploads (Cloudinary / S3) to remove the localStorage size ceiling
+- Server-side comments with moderation
+- Analytics, and a real newsletter integration
+- Deployment to GitHub Pages, Netlify or Vercel
+- Full-text search and RSS output
+
+---
+
+## Tech stack
+
+**HTML5** · **CSS3** · **Vanilla JavaScript (ES5-compatible)** · **localStorage** · **FileReader API** · **Canvas API** · **Base64 data URLs** · **IntersectionObserver**
+
+No frameworks, no libraries, no bundler, no dependencies.
+
+Typography is **Sora** for headings and **Manrope** for body text, loaded from Google Fonts with system fallbacks so the layout holds if the request fails.
 
 ## File structure
 
 ```
 HexSoftwares_Simple_Blog_Website/
 │
-├── index.html              Home page
-├── blog.html               Blog listing (search, filter, sort)
-├── post.html               Single post view (?id=…)
-├── create-post.html        Create-post editor with live preview
-├── about.html              About page
-├── contact.html            Contact page
+├── index.html              Home — featured editorial, latest articles, topics
+├── blog.html               Listing — search, filter, sort, saved, load more
+├── post.html               Single article (?id=…)
+├── create-post.html        Editor with live preview
+├── about.html              About the publication and its author
+├── contact.html            Contact form
 │
 ├── css/
-│   ├── style.css           Design system: tokens, components, themes
-│   └── responsive.css      Breakpoints + mobile navigation drawer
+│   ├── style.css           Design tokens, components, both themes
+│   └── responsive.css      Breakpoints + mobile drawer
 │
 ├── js/
-│   ├── data.js             Seed posts, storage helpers, formatters
-│   ├── app.js              Theme, nav, toasts, safe rendering, cards
-│   ├── blog.js             Home sections, listing, single post view
+│   ├── data.js             Topics, seed articles, storage helpers, migrations
+│   ├── app.js              Theme, nav, toasts, safe rendering, shared components
+│   ├── blog.js             Home sections, listing, single article
 │   ├── create-post.js      Form, image compression, validation
-│   └── contact.js          Contact form handling
+│   └── contact.js          Contact form
 │
-├── assets/
-│   ├── images/
-│   │   ├── nova-journal-logo.png
-│   │   ├── favicon.png
-│   │   ├── fallback.jpg            Shown if any image fails to load
-│   │   ├── author-avatar.jpg
-│   │   └── cover-*.jpg             Six branded category covers
-│   └── icons/                      (icons are inline SVG in the markup)
-│
+├── assets/images/          Logo, favicon, fallback, six topic covers
 ├── favicon.ico
 └── README.md
 ```
@@ -76,79 +153,51 @@ HexSoftwares_Simple_Blog_Website/
 
 No build step and no dependencies.
 
-**Option 1 — open directly**
-
-Double-click `index.html`, or open it in any modern browser.
-
-**Option 2 — local server (recommended)**
-
 ```bash
 python -m http.server 8000
 ```
 
-Then visit <http://localhost:8000>.
+Then open <http://localhost:8000>.
 
-> A server is recommended because some browsers restrict `localStorage` on `file://` URLs. Everything else works either way.
+Opening `index.html` directly also works, though some browsers restrict `localStorage` on `file://` URLs.
 
 ## How it works
 
-1. **First visit** — if `localStorage` key `hexsoftwares_blog_posts` is empty, six full sample posts are seeded automatically, so the site is never blank.
-2. **Reading** — `blog.js` reads posts from storage, derives what should be on screen (filter → sort → slice), and re-renders the list from scratch. Cards link to `post.html?id=<post id>`.
-3. **Writing** — `create-post.js` validates every field, resizes any uploaded image on a `<canvas>` to a maximum width of 1200px, converts it to a Base64 JPEG, and appends the post to storage.
-4. **Rendering** — all user content is written through `textContent` and DOM nodes, never `innerHTML`. Post bodies support a small whitelisted markup subset (`## heading`, `- bullet`, `1. numbered`, `> quote`, `**bold**`, `*italic*`, `` `code` ``) parsed into real elements, so stored content can never execute script.
-
-### Storage keys
-
-| Key | Contents |
-|-----|----------|
-| `hexsoftwares_blog_posts` | All blog posts |
-| `hexsoftwares_theme` | `"dark"` or `"light"` |
-| `nova_bookmarks` | Bookmarked post IDs |
-| `nova_comments` | Comments, keyed by post ID |
-| `nova_newsletter` | Newsletter subscribers |
-| `nova_messages` | Contact form submissions |
+1. **First visit** — if `hexsoftwares_blog_posts` is empty, six full articles are seeded so the site is never blank.
+2. **Reading** — `blog.js` reads from storage, derives what should be on screen (filter → sort → slice) and re-renders the list from scratch. Cards link to `post.html?id=<id>`.
+3. **Writing** — `create-post.js` validates every field, resizes any uploaded image on a `<canvas>` to at most 1200px wide, converts it to a Base64 JPEG and appends the post.
+4. **Rendering** — all user content is written through `textContent` and DOM nodes, never `innerHTML`. Article bodies support a small whitelisted markup subset (`## heading`, `- bullet`, `1. numbered`, `> quote`, `**bold**`, `*italic*`, `` `code` ``) parsed into real elements, so stored content cannot execute script.
 
 ### Image handling
 
-Images are first-class in this project:
+- **Upload or URL** — file input with drag-and-drop, or paste a direct image URL. If both are supplied, the uploaded file wins.
+- **Resized** to ≤1200px wide and compressed before encoding.
+- **Warned** when the encoded result exceeds roughly 2MB.
+- **Placeholder** — an article with no image gets a branded gradient block showing its topic name.
+- **Fallback chain** — every `<img>` falls back to `assets/images/fallback.jpg`, then to the gradient placeholder. The handler is attached once and guards against loops, so a broken-image icon never appears.
+- **Alt text** is required whenever an image is used.
+- **Quota safety** — `QuotaExceededError` is caught, and **your form content is never cleared when a save fails**.
 
-- **Upload** — file input + drag-and-drop, resized to ≤1200px wide and compressed to JPEG at quality 0.82 before encoding.
-- **URL** — paste any direct image URL instead; it previews live once it loads. If both are provided, the uploaded file wins.
-- **Placeholder** — a post with no image gets a branded gradient placeholder showing its category name, so cards never look broken.
-- **Fallback chain** — every `<img>` falls back to `assets/images/fallback.jpg` on error, and then to the gradient placeholder if even that fails. A broken-image icon is never shown.
-- **Alt text** — required whenever an image is used.
-- **Quota safety** — a warning appears above ~2MB, `QuotaExceededError` is caught, and **your form content is never cleared when a save fails**.
-
-#### Using remote photos instead
-
-The bundled covers are local so the site works offline. To use Unsplash photos instead, edit the `COVERS` object at the top of `js/data.js`:
-
-```js
-var COVERS = {
-  ai: 'https://images.unsplash.com/photo-XXXXXXXX?auto=format&fit=crop&w=1200&q=80',
-  // …
-};
-```
-
-Good sources: [AI & technology](https://unsplash.com/s/photos/ai-technology) · [software developers](https://unsplash.com/s/photos/software-developers) · [entrepreneurship](https://unsplash.com/s/photos/entrepreneurship) · [coding laptop](https://unsplash.com/s/photos/coding-laptop) · [business start-up](https://unsplash.com/s/photos/business-start-up).
-
-The fallback chain means a dead URL degrades gracefully rather than breaking the layout.
+The bundled covers are local so the site works offline. To use remote photography instead, replace the `cover` values in `CATEGORY_INFO` at the top of `js/data.js` with direct image URLs; the fallback chain means a dead link degrades gracefully.
 
 ## Accessibility
 
-- Semantic landmarks (`header`, `nav`, `main`, `article`, `aside`, `footer`) and a skip-to-content link
-- Sequential heading order on every page
-- Every form control has a visible `<label>`; errors use an icon **and** text, never colour alone
-- Errors are announced via `role="alert"` / `aria-live`
-- Mobile drawer manages `aria-expanded`, traps focus, and closes on <kbd>Esc</kbd>
-- All interactive targets are at least 44×44px
-- Visible `:focus-visible` rings throughout
-- `prefers-reduced-motion` and `prefers-contrast` are both respected
-- Light-mode accent is darkened to `#06708F` so accent text clears 4.5:1 contrast on white
+- Semantic landmarks, sequential headings, one `<h1>` per page
+- Every form control has a visible label; errors use an icon **and** text, never colour alone
+- Errors announced via `role="alert"` / `aria-live`
+- Mobile drawer manages `aria-expanded`, traps focus and closes on <kbd>Esc</kbd>
+- All interactive targets meet the 44×44px minimum
+- `prefers-reduced-motion` and `prefers-contrast` respected
+- Light-mode accent darkened to `#06708F` so accent text clears 4.5:1 on white
+- Without JavaScript, content still renders (scroll-reveal is opt-in via a `.js` class)
 
-## Browser support
+## Testing
 
-Current versions of Chrome, Edge, Firefox and Safari. `backdrop-filter` and `color-mix` degrade gracefully where unsupported.
+A Playwright suite of **149 automated checks** covers all six pages in headless Chromium: seeding, search, filtering, sorting, the saved view, load-more, the single article, comments, bookmarks, breadcrumbs, create-post validation, image fallbacks, quota handling, delete confirmation, contact, newsletter, theme persistence, `prefers-color-scheme`, the mobile drawer focus trap, 320px reflow, touch targets, no-JS rendering, corrupt-storage recovery, blocked-localStorage degradation and the key/topic migrations.
+
+XSS is covered explicitly: an article whose title and body contain `<script>` and `onerror=` renders as literal text and executes nothing.
+
+Last run: **149 passed, 0 failed, 0 console errors.** The suite is a development tool and is not part of the shipped site.
 
 ## Design inspiration
 
@@ -158,18 +207,7 @@ Referenced, not copied — **Medium** (reading experience), **Dev.to** (card gri
 
 1. Create a GitHub repository named **`HexSoftwares_Simple_Blog_Website`**
 2. Push this code to the repository
-3. Record a LinkedIn video walking through the project and include the repository link, tagging **Hex Softwares Pvt. Ltd.**
-
-## Possible next steps
-
-- A backend (Node + Express, or Supabase/Firebase) so posts are not limited to one browser
-- Authentication and an admin dashboard for managing posts
-- A proper Markdown editor with live split-pane preview
-- Cloud image uploads (Cloudinary / S3) to remove the localStorage size ceiling
-- Server-side comments with moderation
-- Analytics, and a real newsletter integration (Mailchimp / Buttondown)
-- Deployment to GitHub Pages, Netlify or Vercel
-- Full-text search across post bodies, plus RSS output
+3. Record a LinkedIn video walking through the project, include the repository link, and tag **Hex Softwares Pvt. Ltd.**
 
 ---
 

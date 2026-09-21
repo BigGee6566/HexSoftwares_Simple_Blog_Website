@@ -245,6 +245,102 @@ var UI = (function () {
     return badge;
   }
 
+  /* Shared so the blog listing, home cards and the article page all behave
+     identically — one implementation, one set of labels. */
+  function bookmarkButton(post, onToggle) {
+    var btn = el('button', 'btn-icon');
+    btn.type = 'button';
+    btn.appendChild(icon('bookmark'));
+
+    function sync(marked) {
+      btn.classList.toggle('is-active', marked);
+      btn.setAttribute('aria-pressed', marked ? 'true' : 'false');
+      btn.setAttribute('aria-label',
+        (marked ? 'Remove bookmark from' : 'Bookmark') + ': ' + post.title);
+      btn.setAttribute('title', marked ? 'Remove bookmark' : 'Bookmark');
+    }
+    sync(NOVA.isBookmarked(post.id));
+
+    btn.addEventListener('click', function () {
+      var now = NOVA.toggleBookmark(post.id);
+      sync(now);
+      toast(now ? 'Saved to your bookmarks.' : 'Bookmark removed.', 'info');
+      if (typeof onToggle === 'function') onToggle(now);
+    });
+    return btn;
+  }
+
+  function deleteButton(post, onDelete) {
+    var btn = el('button', 'btn-icon danger');
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Delete post: ' + post.title);
+    btn.setAttribute('title', 'Delete post');
+    btn.appendChild(icon('trash'));
+
+    btn.addEventListener('click', function () {
+      confirmDialog({
+        title: 'Delete this post?',
+        message: '“' + NOVA.truncate(post.title, 60) + '” will be permanently removed from this browser. This cannot be undone.',
+        confirmLabel: 'Delete post',
+        danger: true
+      }, function () {
+        var res = NOVA.deletePost(post.id);
+        if (!res.ok && res.reason === 'quota') {
+          toast('Your browser storage is full. Try deleting older posts.', 'error');
+        } else {
+          toast('Post deleted.', 'success');
+        }
+        if (typeof onDelete === 'function') onDelete(res.posts);
+      });
+    });
+    return btn;
+  }
+
+  /* Topic entry for "Explore Our Topics" — deliberately a different shape
+     from an article card, so the two sections do not read as the same grid. */
+  function topicCard(info, count) {
+    var link = el('a', 'topic-card reveal');
+    link.href = 'blog.html?category=' + encodeURIComponent(info.name);
+
+    link.appendChild(el('h3', 'topic-name', info.name));
+    link.appendChild(el('p', 'topic-blurb', info.blurb));
+
+    var foot = el('span', 'topic-count');
+    foot.textContent = count === 0
+      ? 'No articles yet'
+      : count + (count === 1 ? ' article' : ' articles');
+    link.appendChild(foot);
+    return link;
+  }
+
+  function buildBreadcrumbs(post) {
+    var nav = el('nav', 'breadcrumbs');
+    nav.setAttribute('aria-label', 'Breadcrumb');
+    var list = el('ol');
+
+    function crumb(label, href, isCurrent) {
+      var li = el('li');
+      if (href && !isCurrent) {
+        var a = el('a', null, label);
+        a.href = href;
+        li.appendChild(a);
+      } else {
+        var span = el('span', null, label);
+        if (isCurrent) span.setAttribute('aria-current', 'page');
+        li.appendChild(span);
+      }
+      return li;
+    }
+
+    list.appendChild(crumb('Home', 'index.html'));
+    list.appendChild(crumb('Blog', 'blog.html'));
+    list.appendChild(crumb(post.category, 'blog.html?category=' + encodeURIComponent(post.category)));
+    list.appendChild(crumb(NOVA.truncate(post.title, 44), null, true));
+
+    nav.appendChild(list);
+    return nav;
+  }
+
   /* opts: { showTools:Boolean, onDelete:Function, reveal:Boolean } */
   function postCard(post, opts) {
     opts = opts || {};
@@ -278,47 +374,10 @@ var UI = (function () {
     read.appendChild(icon('arrowRight'));
     foot.appendChild(read);
 
-    if (opts.showTools) {
+    if (opts.showTools || opts.showBookmark) {
       var tools = el('div', 'card-tools');
-
-      var bm = el('button', 'btn-icon');
-      bm.type = 'button';
-      var marked = NOVA.isBookmarked(post.id);
-      bm.classList.toggle('is-active', marked);
-      bm.setAttribute('aria-pressed', marked ? 'true' : 'false');
-      bm.setAttribute('aria-label', (marked ? 'Remove bookmark from' : 'Bookmark') + ' ' + post.title);
-      bm.appendChild(icon('bookmark'));
-      bm.addEventListener('click', function () {
-        var now = NOVA.toggleBookmark(post.id);
-        bm.classList.toggle('is-active', now);
-        bm.setAttribute('aria-pressed', now ? 'true' : 'false');
-        bm.setAttribute('aria-label', (now ? 'Remove bookmark from' : 'Bookmark') + ' ' + post.title);
-        toast(now ? 'Saved to your bookmarks.' : 'Bookmark removed.', 'info');
-      });
-      tools.appendChild(bm);
-
-      var del = el('button', 'btn-icon danger');
-      del.type = 'button';
-      del.setAttribute('aria-label', 'Delete post: ' + post.title);
-      del.appendChild(icon('trash'));
-      del.addEventListener('click', function () {
-        confirmDialog({
-          title: 'Delete this post?',
-          message: '“' + NOVA.truncate(post.title, 60) + '” will be permanently removed from this browser. This cannot be undone.',
-          confirmLabel: 'Delete post',
-          danger: true
-        }, function () {
-          var res = NOVA.deletePost(post.id);
-          if (!res.ok && res.reason === 'quota') {
-            toast('Your browser storage is full. Try deleting older posts.', 'error');
-          } else {
-            toast('Post deleted.', 'success');
-          }
-          if (typeof opts.onDelete === 'function') opts.onDelete(res.posts);
-        });
-      });
-      tools.appendChild(del);
-
+      tools.appendChild(bookmarkButton(post, opts.onBookmark));
+      if (opts.showTools) tools.appendChild(deleteButton(post, opts.onDelete));
       foot.appendChild(tools);
     }
 
@@ -353,7 +412,7 @@ var UI = (function () {
     var cta = el('a', 'btn btn-primary');
     cta.href = href;
     cta.style.alignSelf = 'flex-start';
-    cta.appendChild(document.createTextNode('Read More'));
+    cta.appendChild(document.createTextNode('Read Featured Story'));
     cta.appendChild(icon('arrowRight'));
     body.appendChild(cta);
 
@@ -757,9 +816,13 @@ var UI = (function () {
     buildMeta: buildMeta,
     buildBadge: buildBadge,
     buildPlaceholder: buildPlaceholder,
+    buildBreadcrumbs: buildBreadcrumbs,
     attachImageFallback: attachImageFallback,
+    bookmarkButton: bookmarkButton,
+    deleteButton: deleteButton,
     postCard: postCard,
     featuredCard: featuredCard,
+    topicCard: topicCard,
     emptyState: emptyState,
     toast: toast,
     confirmDialog: confirmDialog,

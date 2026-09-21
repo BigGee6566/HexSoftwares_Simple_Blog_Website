@@ -97,11 +97,8 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, .42);
   --shadow-lg: 0 20px 56px rgba(0, 0, 0, .55);
-  --shadow-glow: 0 10px 40px rgba(0, 150, 220, .28);
+  --shadow-glow: 0 4px 16px rgba(0, 150, 220, .16);
 
-  --hero-mesh-1: rgba(0, 212, 255, .20);
-  --hero-mesh-2: rgba(30, 144, 255, .18);
-  --hero-mesh-3: rgba(120, 80, 255, .14);
   --scrim: rgba(4, 8, 16, .72);
 }
 
@@ -135,11 +132,8 @@
   --shadow-sm: 0 1px 2px rgba(16, 32, 56, .07);
   --shadow-md: 0 8px 24px rgba(16, 32, 56, .10);
   --shadow-lg: 0 20px 56px rgba(16, 32, 56, .14);
-  --shadow-glow: 0 10px 40px rgba(30, 144, 255, .18);
+  --shadow-glow: 0 4px 16px rgba(30, 144, 255, .12);
 
-  --hero-mesh-1: rgba(0, 170, 210, .20);
-  --hero-mesh-2: rgba(30, 144, 255, .16);
-  --hero-mesh-3: rgba(140, 110, 255, .12);
   --scrim: rgba(255, 255, 255, .70);
 }
 
@@ -405,7 +399,7 @@ main { flex: 1 0 auto; width: 100%; }
 .btn-primary:hover {
   color: var(--btn-on-accent);
   transform: translateY(-2px);
-  box-shadow: 0 14px 44px rgba(0, 170, 235, .42);
+  box-shadow: 0 8px 24px rgba(0, 170, 235, .26);
 }
 
 .btn-ghost {
@@ -483,110 +477,54 @@ main { flex: 1 0 auto; width: 100%; }
   position: relative;
   padding-block: var(--sp-8) var(--sp-7);
   overflow: hidden;
-  isolation: isolate;
 }
 
-.hero-mesh {
-  position: absolute;
-  inset: -30% -10% auto -10%;
-  height: 150%;
-  z-index: -2;
-  background:
-    radial-gradient(42% 40% at 18% 28%, var(--hero-mesh-1) 0%, transparent 62%),
-    radial-gradient(38% 38% at 82% 22%, var(--hero-mesh-2) 0%, transparent 60%),
-    radial-gradient(44% 42% at 55% 78%, var(--hero-mesh-3) 0%, transparent 64%);
-  filter: blur(24px);
-  animation: meshDrift 26s ease-in-out infinite alternate;
-  pointer-events: none;
+/* Left-aligned editorial masthead, not a centred marketing hero */
+.hero-grid {
+  display: grid;
+  gap: var(--sp-6);
+  align-items: center;
 }
 
-@keyframes meshDrift {
-  0%   { transform: translate3d(0, 0, 0) scale(1); }
-  50%  { transform: translate3d(-3%, 2%, 0) scale(1.08); }
-  100% { transform: translate3d(3%, -2%, 0) scale(1.03); }
-}
+.hero-inner { max-width: 60ch; }
 
-/* Faint grid texture behind hero */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -3;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(circle at 50% 35%, #000 0%, transparent 72%);
-  -webkit-mask-image: radial-gradient(circle at 50% 35%, #000 0%, transparent 72%);
-  opacity: .5;
-  pointer-events: none;
+.masthead {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: .06em;
+  color: var(--text-faint);
+  padding-bottom: var(--sp-3);
+  margin-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--border);
 }
-
-.hero-shape {
-  position: absolute;
-  border-radius: 50%;
-  z-index: -1;
-  pointer-events: none;
-  opacity: .5;
-  border: 1.5px solid var(--accent);
-  animation: floatY 13s ease-in-out infinite;
-}
-
-.hero-shape.s1 { width: 108px; height: 108px; top: 16%; right: 9%; }
-.hero-shape.s2 { width: 62px;  height: 62px;  bottom: 20%; left: 7%; animation-delay: -4s; opacity: .35; }
-.hero-shape.s3 {
-  width: 150px; height: 150px; top: 58%; right: 22%;
-  border-radius: 34%; transform: rotate(22deg); animation-delay: -8s; opacity: .22;
-}
-
-@keyframes floatY {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50%      { transform: translateY(-22px) rotate(8deg); }
-}
-
-.hero-inner { max-width: 760px; }
 
 .hero h1 {
   font-size: var(--fs-3xl);
-  font-weight: 800;
-  letter-spacing: -0.035em;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
   margin-bottom: var(--sp-4);
-}
-
-.hero h1 .grad {
-  background: var(--brand-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 .hero-sub {
   font-size: var(--fs-md);
   color: var(--text-muted);
-  max-width: 620px;
+  max-width: 58ch;
   margin-bottom: var(--sp-6);
 }
 
 .hero-cta { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
 
-/* Trust strip */
-.trust-strip {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--sp-2) var(--sp-4);
-  margin-top: var(--sp-6);
-  padding-top: var(--sp-5);
-  border-top: 1px solid var(--border);
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  letter-spacing: .04em;
-  color: var(--text-faint);
-  text-transform: uppercase;
+/* The orbit from the NOVA wordmark, reused as the hero's visual anchor.
+   Decorative, but tied to the identity rather than an abstract blob. */
+.hero-mark {
+  display: none;
+  justify-self: center;
+  color: var(--accent);
+  opacity: .5;
 }
 
-.trust-strip span { display: inline-flex; align-items: center; gap: var(--sp-2); }
-.trust-strip .sep { color: var(--accent); }
+.hero-mark svg { width: min(280px, 34vw); height: auto; }
 
 /* --------------------------------------------------------------------------
    7. COVER IMAGES & PLACEHOLDERS
@@ -741,7 +679,7 @@ main { flex: 1 0 auto; width: 100%; }
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: .5;
+  opacity: .28;
 }
 
 .featured-card .cover { border-radius: 0; height: 100%; }
@@ -772,8 +710,7 @@ main { flex: 1 0 auto; width: 100%; }
   border-radius: var(--r-pill);
   font-size: var(--fs-xs);
   font-weight: 700;
-  letter-spacing: .05em;
-  text-transform: uppercase;
+  letter-spacing: .01em;
   background: var(--accent-soft);
   color: var(--accent);
   border: 1px solid transparent;
@@ -885,6 +822,109 @@ main { flex: 1 0 auto; width: 100%; }
 
 .tag::before { content: '#'; opacity: .55; margin-right: 2px; }
 
+/* Saved-articles chip carries an icon so it reads as a mode, not a topic */
+.chip-saved svg { width: 15px; height: 15px; }
+.chip-saved[aria-pressed="true"] svg { color: var(--accent); }
+
+/* --------------------------------------------------------------------------
+   9b. TOPIC INDEX  ("Explore Our Topics")
+   Deliberately NOT an article card: a ruled editorial index entry, so the
+   two sections do not read as the same repeated grid.
+   -------------------------------------------------------------------------- */
+
+.topic-grid {
+  display: grid;
+  gap: var(--sp-5) var(--sp-6);
+}
+
+.topic-card {
+  display: block;
+  padding-top: var(--sp-4);
+  border-top: 2px solid var(--border);
+  color: var(--text);
+  transition: border-color var(--t-base), transform var(--t-base);
+}
+
+.topic-card:hover,
+.topic-card:focus-visible {
+  border-top-color: var(--accent);
+  transform: translateY(-2px);
+  color: var(--text);
+}
+
+.topic-name {
+  font-size: var(--fs-base);
+  line-height: 1.3;
+  margin-bottom: var(--sp-2);
+  transition: color var(--t-fast);
+}
+
+.topic-card:hover .topic-name { color: var(--accent); }
+
+.topic-blurb {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--sp-3);
+}
+
+.topic-count {
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   9c. BREADCRUMBS
+   -------------------------------------------------------------------------- */
+
+.breadcrumbs { margin-bottom: var(--sp-4); }
+
+.breadcrumbs ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+}
+
+.breadcrumbs li { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.breadcrumbs li + li::before { content: '/'; color: var(--text-faint); opacity: .6; }
+.breadcrumbs a { color: var(--text-muted); }
+.breadcrumbs a:hover { color: var(--accent); }
+.breadcrumbs [aria-current="page"] { color: var(--text); font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   9d. SKILL LIST (About) — a ruled definition list, not another card grid
+   -------------------------------------------------------------------------- */
+
+.skill-list { display: grid; gap: 0; }
+
+.skill-row {
+  display: grid;
+  gap: var(--sp-1) var(--sp-5);
+  padding-block: var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-row:first-child { border-top: 1px solid var(--border); }
+
+.skill-row dt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+
+.skill-row dd {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+@media (min-width: 640px) {
+  .skill-row { grid-template-columns: 200px minmax(0, 1fr); align-items: baseline; }
+}
+
 /* --------------------------------------------------------------------------
    10. STATS / ABOUT PREVIEW / NEWSLETTER
    -------------------------------------------------------------------------- */
@@ -943,11 +983,26 @@ main { flex: 1 0 auto; width: 100%; }
 .about-portrait {
   width: 104px;
   height: 104px;
+  flex-shrink: 0;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--accent);
   padding: 3px;
   background: var(--bg);
+}
+
+/* Typographic monogram stands in for a portrait. An honest placeholder
+   beats a stock face — swap in a real photo when one is available. */
+.monogram {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: .02em;
+  color: var(--accent);
+  background: var(--surface-2);
+  padding: 0;
 }
 
 .newsletter-form {
@@ -1636,7 +1691,6 @@ textarea.tall { min-height: 300px; }
   }
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; }
-  .hero-mesh, .hero-shape { animation: none; }
 }
 
 @media (prefers-contrast: more) {

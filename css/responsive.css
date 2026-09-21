@@ -127,6 +127,7 @@
 
   .grid-2 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .topic-grid { grid-template-columns: repeat(2, 1fr); }
 
   .section { padding-block: var(--sp-8); }
 
@@ -152,6 +153,9 @@
 
   .hero { padding-block: var(--sp-9) var(--sp-8); }
   .hero h1 { font-size: var(--fs-3xl); }
+
+  .hero-grid { grid-template-columns: minmax(0, 1.15fr) auto; }
+  .hero-mark { display: block; }
 
   /* Featured post: image left, text right */
   .featured-card { grid-template-columns: 1.05fr 1fr; align-items: stretch; }
@@ -192,6 +196,7 @@
 
 @media (min-width: 1100px) {
   .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .topic-grid { grid-template-columns: repeat(3, 1fr); }
 
   .hero-inner { max-width: 800px; }
 
@@ -234,7 +239,6 @@
   .form-actions { flex-direction: column; }
   .form-actions .btn { width: 100%; }
 
-  .hero-shape { display: none; }
 }
 
 /* --------------------------------------------------------------------------

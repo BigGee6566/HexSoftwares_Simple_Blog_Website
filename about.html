@@ -69,78 +69,122 @@
 
       <div class="section-head reveal">
         <div>
-          <p class="eyebrow">About</p>
+          <p class="masthead">NOVA Journal — Eastern Cape, South Africa</p>
           <h1 class="section-title" style="font-size:var(--fs-2xl);">About NOVA Journal</h1>
         </div>
       </div>
 
       <div class="about-layout">
-
         <div>
-          <div class="panel panel-gradient reveal" style="margin-bottom:var(--sp-5);">
-            <div class="about-preview">
-              <img class="about-portrait" src="assets/images/author-avatar.jpg" alt="Portrait of Yongama, author of NOVA Journal" width="400" height="400" data-fallback="assets/images/fallback.jpg">
-              <div>
-                <h2 class="section-title" style="font-size:var(--fs-lg); margin-bottom:var(--sp-2);">Hi, I am Yongama</h2>
-                <p class="section-sub" style="font-size:var(--fs-sm); max-width:52ch;">
-                  An Information Systems student and emerging technology entrepreneur based in the Eastern Cape, South Africa.
-                  I write about what I am building, breaking and learning.
-                </p>
-              </div>
+
+          <!-- Introduction -->
+          <div class="article-body reveal" style="max-width:none;">
+            <p>NOVA Journal is a technology and creativity blog created by <strong>Yongama Goso</strong>, an Information Systems student, emerging software developer, and technology entrepreneur from South Africa.</p>
+            <p>The blog explores the ideas, tools, and stories shaping technology, business, education, and digital creativity. It focuses on practical, accessible writing about artificial intelligence, software development, entrepreneurship, innovation, skills development, and the changing digital world.</p>
+            <p>It was created as a space to document learning, share useful insights, discuss new ideas, and show practical projects — combining technology with creativity to make complex topics easier to understand for students, entrepreneurs, developers, and curious learners.</p>
+            <p>The name <strong>NOVA</strong> refers to a sudden burst of light: a bright new beginning. The journal aims to highlight new ideas and encourage people to explore what they can build in the digital age.</p>
+          </div>
+
+          <!-- Mission & Vision -->
+          <h2 class="section-title" style="margin:var(--sp-7) 0 var(--sp-4);">Mission and vision</h2>
+          <div class="grid grid-2">
+            <div class="panel reveal">
+              <h3 class="topic-name" style="margin-bottom:var(--sp-3);">Mission</h3>
+              <p class="section-sub" style="margin:0;">To make technology, innovation, and entrepreneurship easier to understand and more accessible to students, creators, developers, and emerging business builders — encouraging practical learning, creative thinking, and responsible use of technology to solve real-world problems.</p>
+            </div>
+            <div class="panel reveal">
+              <h3 class="topic-name" style="margin-bottom:var(--sp-3);">Vision</h3>
+              <p class="section-sub" style="margin:0;">To become a trusted digital space where ideas, technology, and creativity come together to inspire learning, innovation, and meaningful opportunities.</p>
             </div>
           </div>
 
+          <!-- Topics -->
+          <h2 class="section-title" style="margin:var(--sp-7) 0 var(--sp-4);">Explore Our Topics</h2>
+          <div class="topic-grid" id="topic-grid"></div>
+
+          <!-- About Yongama -->
+          <h2 class="section-title" style="margin:var(--sp-7) 0 var(--sp-4);">About Yongama</h2>
           <div class="article-body reveal" style="max-width:none;">
-            <h2>Why this journal exists</h2>
-            <p>NOVA Journal is where I think in public. Writing something down forces a level of clarity that reading never does — if I cannot explain an idea plainly, I do not understand it yet.</p>
-            <p>The topics I keep returning to are artificial intelligence, software development, entrepreneurship, digital innovation, education and skills development, technology in South Africa, business ideas, and creative media. They overlap more than they look like they should.</p>
-
-            <h2>What it was built for</h2>
-            <p>This site is <strong>Task 1 of the Hex Softwares Web Development Internship</strong>. The brief was a simple blog. I treated it as a chance to build something I would actually be comfortable putting my name on.</p>
-            <p>Everything runs in the browser. There is no backend, no database, no framework and no build step — posts are stored with <code>localStorage</code>, and uploaded images are resized on a <code>&lt;canvas&gt;</code> and kept as Base64 data URLs.</p>
-
-            <blockquote>Constraints are useful. Having no framework to reach for meant understanding what the browser was actually doing.</blockquote>
-
-            <h2>What I learned building it</h2>
-            <ul>
-              <li><strong>DOM manipulation</strong> — building every card, article and form state in JavaScript rather than hard-coding markup.</li>
-              <li><strong>Responsive design</strong> — a mobile-first stylesheet with a real breakpoint strategy, tested down to 320px.</li>
-              <li><strong>localStorage</strong> — persisting data, handling corrupt values, and dealing with <code>QuotaExceededError</code> without losing the user's work.</li>
-              <li><strong>Base64 image handling</strong> — <code>FileReader</code>, canvas resizing and compression, plus a fallback chain so a broken image never shows a broken icon.</li>
-              <li><strong>Form validation</strong> — inline, per-field errors that announce themselves properly instead of a single alert box.</li>
-              <li><strong>Accessibility</strong> — semantic landmarks, a focus-trapped mobile drawer, visible focus rings, and never using colour alone to signal an error.</li>
-              <li><strong>Clean UI/UX</strong> — a token-based design system so spacing, colour and motion stay consistent across every page.</li>
-            </ul>
-
-            <h2>Design inspiration</h2>
-            <p>The layout borrows ideas from publications I admire, without copying any of them:</p>
-            <ul>
-              <li><strong>Medium</strong> — generous whitespace and a comfortable reading measure.</li>
-              <li><strong>Dev.to</strong> — a friendly card grid with tags and author avatars.</li>
-              <li><strong>Hashnode</strong> — a dark-first, developer-focused aesthetic.</li>
-              <li><strong>Ghost</strong> — an editorial feel with a strong featured post.</li>
-              <li><strong>anshuopinion's Project-9-Blog-Website</strong> — a useful reference for basic blog structure in plain HTML and CSS.</li>
-            </ul>
-
-            <h2>What is next</h2>
-            <p>The obvious next steps are a real backend so posts are not trapped in one browser, proper authentication, and a Markdown editor. For now, the constraint is the point.</p>
+            <p>I am an Information Systems student, emerging software developer, and technology entrepreneur from South Africa. I am interested in using technology, artificial intelligence, and digital innovation to solve practical problems and create opportunities for individuals, businesses, and communities.</p>
+            <p>My work combines software development, business development, education, and creative digital projects. I enjoy building websites, dashboards, booking systems, database-backed applications, and AI-assisted tools that make information and services easier to access.</p>
+            <p>I am currently developing my skills in HTML, CSS, JavaScript, C#, ASP.NET, SQL, PostgreSQL, MySQL, responsive design, and AI-assisted software development. I also use digital tools to research ideas, plan businesses, and create educational resources.</p>
+            <p>Beyond coding, I am interested in entrepreneurship, innovation hubs, youth development, digital skills training, content creation, graphic design, and the future of artificial intelligence. I believe technology should be practical, accessible, and relevant to the communities it serves.</p>
+            <p>NOVA Journal is where I share ideas, projects, lessons, and experiments. It documents my growth as a student, developer, and lifelong learner.</p>
           </div>
+
+          <!-- Skills -->
+          <h2 class="section-title" style="margin:var(--sp-7) 0 var(--sp-4);">What I work with</h2>
+          <dl class="skill-list reveal">
+            <div class="skill-row">
+              <dt>HTML5</dt>
+              <dd>Semantic page structure and accessible web content</dd>
+            </div>
+            <div class="skill-row">
+              <dt>CSS3</dt>
+              <dd>Responsive layouts, animations, design systems, and modern UI styling</dd>
+            </div>
+            <div class="skill-row">
+              <dt>JavaScript</dt>
+              <dd>Interactive interfaces, forms, filters, localStorage, and browser APIs</dd>
+            </div>
+            <div class="skill-row">
+              <dt>C# and ASP.NET</dt>
+              <dd>Database-backed applications and business systems</dd>
+            </div>
+            <div class="skill-row">
+              <dt>SQL and databases</dt>
+              <dd>Data modelling, queries, PostgreSQL, MySQL, and application integration</dd>
+            </div>
+            <div class="skill-row">
+              <dt>Artificial intelligence</dt>
+              <dd>AI-assisted development, prompt engineering, research, and workflow automation</dd>
+            </div>
+            <div class="skill-row">
+              <dt>Business development</dt>
+              <dd>Idea validation, business planning, innovation programmes, and digital strategy</dd>
+            </div>
+          </dl>
+
+          <!-- How it was built -->
+          <div class="article-body reveal" style="max-width:none; margin-top:var(--sp-7);">
+            <h2>How the website was built</h2>
+            <p>NOVA Journal is a front-end website built with HTML5, CSS3, and vanilla JavaScript. It uses <code>localStorage</code> to store blog posts, bookmarks, comments, newsletter sign-ups, and contact messages in the browser. The <code>FileReader</code> API handles featured-image uploads, which are resized on a <code>&lt;canvas&gt;</code> and stored as Base64 data — so images work without a backend or database.</p>
+            <p>The project demonstrates responsive design, page navigation, form validation, image handling, search, category filtering, sorting, dark mode, dynamic content rendering, and accessible interface design.</p>
+
+            <h2>Key features</h2>
+            <ul>
+              <li>Dynamic featured editorial and latest-articles feed on the home page</li>
+              <li>Search, topic filtering, sorting, saved bookmarks, and load-more pagination</li>
+              <li>A full create-post editor with live preview, validation, and image compression</li>
+              <li>Single-article view with breadcrumbs, reading progress, sharing, and comments</li>
+              <li>Dark and light themes with the preference remembered between visits</li>
+              <li>Graceful behaviour when storage is full, blocked, or an image fails to load</li>
+            </ul>
+
+            <h2>Project purpose</h2>
+            <p>NOVA Journal was developed for the <strong>Hex Softwares Web Development Internship — Task 1</strong>. It demonstrates planning, designing, developing, and improving a complete blog website using core front-end technologies.</p>
+            <p>It also represents my growth as an Information Systems student and developer: it let me practise interface design, JavaScript functionality, browser storage, responsive layouts, accessibility, and user-experience decisions.</p>
+          </div>
+
+          <!-- CTAs -->
+          <div class="panel panel-gradient reveal" style="margin-top:var(--sp-7);">
+            <h2 class="section-title" style="font-size:var(--fs-lg); margin-bottom:var(--sp-2);">Have something to share?</h2>
+            <p class="section-sub" style="margin-bottom:var(--sp-5);">Have an idea, project, or perspective to share? Explore the latest articles, create your own post, or get in touch.</p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="blog.html">Read the Blog</a>
+              <a class="btn btn-ghost" href="create-post.html">Create a Post</a>
+              <a class="btn btn-ghost" href="contact.html">Get in Touch</a>
+            </div>
+          </div>
+
         </div>
 
         <!-- Sidebar -->
         <aside class="about-aside">
           <div class="panel reveal" style="margin-bottom:var(--sp-4);">
-            <h2 class="section-title" style="font-size:var(--fs-base); margin-bottom:var(--sp-4);">Built with</h2>
-            <div class="tag-list" style="gap:var(--sp-2);">
-              <span class="tag">HTML5</span>
-              <span class="tag">CSS3</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">localStorage</span>
-              <span class="tag">FileReader</span>
-              <span class="tag">Base64</span>
-              <span class="tag">Canvas</span>
-              <span class="tag">IntersectionObserver</span>
-            </div>
+            <span class="about-portrait monogram" aria-hidden="true">YG</span>
+            <h2 class="topic-name" style="margin-bottom:var(--sp-1);">Yongama Goso</h2>
+            <p class="field-hint">Information Systems student, developer and technology entrepreneur — Eastern Cape, South Africa.</p>
           </div>
 
           <div class="stats reveal" id="stats" style="grid-template-columns:repeat(2,1fr); margin-bottom:var(--sp-4);">
@@ -154,11 +198,16 @@
             </div>
           </div>
 
-          <div class="panel panel-gradient reveal">
-            <h2 class="section-title" style="font-size:var(--fs-base); margin-bottom:var(--sp-2);">Get in touch</h2>
-            <p class="field-hint" style="margin-bottom:var(--sp-4);">Questions, feedback or collaboration ideas are all welcome.</p>
-            <a class="btn btn-primary btn-block btn-sm" href="contact.html" style="margin-bottom:var(--sp-2);">Contact me</a>
-            <a class="btn btn-ghost btn-block btn-sm" href="blog.html">Read the blog</a>
+          <div class="panel reveal">
+            <h2 class="topic-name" style="margin-bottom:var(--sp-3);">Built with</h2>
+            <div class="tag-list">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">localStorage</span>
+              <span class="tag">FileReader</span>
+              <span class="tag">Canvas</span>
+            </div>
           </div>
         </aside>
 
@@ -174,9 +223,9 @@
     <div class="footer-grid">
       <div>
         <a href="index.html" class="footer-brand" aria-label="NOVA Journal — home">
-          <img src="assets/images/nova-journal-logo.png" alt="NOVA Journal" width="1053" height="476" data-fallback="assets/images/fallback.jpg">
+          <img src="assets/images/nova-journal-logo.png" alt="NOVA Journal" width="1053" height="476" loading="lazy" data-fallback="assets/images/fallback.jpg">
         </a>
-        <p class="footer-tagline">Ideas, technology and stories shaping the future — written from the Eastern Cape, South Africa.</p>
+        <p class="footer-tagline">A working journal on software, AI and entrepreneurship — written from the Eastern Cape, South Africa.</p>
       </div>
 
       <div class="footer-col">
@@ -197,7 +246,8 @@
           <li><a href="blog.html?category=Software%20Development">Software Development</a></li>
           <li><a href="blog.html?category=Entrepreneurship">Entrepreneurship</a></li>
           <li><a href="blog.html?category=Digital%20Innovation">Digital Innovation</a></li>
-          <li><a href="blog.html?category=Education">Education</a></li>
+          <li><a href="blog.html?category=Education%20and%20Skills">Education and Skills</a></li>
+          <li><a href="blog.html?category=Creative%20Technology">Creative Technology</a></li>
         </ul>
       </div>
 

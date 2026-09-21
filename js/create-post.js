@@ -106,8 +106,20 @@
   }
 
   function syncReadingTime() {
-    if (readingTimeTouched || !f.readingTime || !f.content) return;
-    f.readingTime.value = NOVA.calculateReadingTime(f.content.value);
+    if (!f.content) return;
+
+    var words = NOVA.countWords(f.content.value);
+    var minutes = NOVA.calculateReadingTime(f.content.value);
+
+    var wordCounter = document.getElementById('word-counter');
+    if (wordCounter) {
+      wordCounter.textContent = words + (words === 1 ? ' word' : ' words') +
+                                ' · ' + minutes + ' min read';
+    }
+
+    // Stop overwriting the field once the author has set it by hand.
+    if (readingTimeTouched || !f.readingTime) return;
+    f.readingTime.value = minutes;
   }
 
   /* ----------------------------------------------------------------------

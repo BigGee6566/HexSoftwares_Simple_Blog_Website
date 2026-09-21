@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA Journal — Ideas, Technology and Stories Shaping the Future</title>
-<meta name="description" content="A personal technology journal covering AI, software development, entrepreneurship, digital innovation, education and creative media. Built for the Hex Softwares Web Development Internship.">
+<title>NOVA Journal — Notes on Software, AI and Entrepreneurship</title>
+<meta name="description" content="A working journal by Yongama Goso on software development, artificial intelligence, entrepreneurship and digital innovation — written from the Eastern Cape, South Africa.">
 <link rel="icon" href="assets/images/favicon.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
@@ -66,102 +66,77 @@
 
   <!-- ===================== HERO ===================== -->
   <section class="hero">
-    <div class="hero-mesh" aria-hidden="true"></div>
-    <span class="hero-shape s1" aria-hidden="true"></span>
-    <span class="hero-shape s2" aria-hidden="true"></span>
-    <span class="hero-shape s3" aria-hidden="true"></span>
-
-    <div class="container">
+    <div class="container hero-grid">
       <div class="hero-inner">
-        <p class="eyebrow">NOVA Journal</p>
-        <h1>Ideas, technology, and stories <span class="grad">shaping the future.</span></h1>
-        <p class="hero-sub">Explore practical insights on AI, software development, entrepreneurship, innovation, and creative digital work.</p>
+        <p class="masthead">NOVA Journal — Eastern Cape, South Africa</p>
+        <h1>Notes from building software, and the business questions that come with it.</h1>
+        <p class="hero-sub">I'm Yongama Goso, an Information Systems student and developer. This is where I write down what I'm learning about code, AI, entrepreneurship, and making technology that actually reaches people.</p>
 
         <div class="hero-cta">
           <a class="btn btn-primary btn-lg" href="blog.html">
-            Read the Blog
+            Read the latest articles
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
-          <a class="btn btn-ghost btn-lg" href="create-post.html">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 10-10-3-3L5 16z"/><path d="M14 6l3 3"/></svg>
-            Write a Post
-          </a>
+          <a class="btn btn-ghost btn-lg" href="about.html">About this journal</a>
         </div>
+      </div>
 
-        <p class="trust-strip">
-          <span>Featured on LinkedIn</span>
-          <span class="sep" aria-hidden="true">•</span>
-          <span>Built with HTML, CSS &amp; JavaScript</span>
-        </p>
+      <!-- Orbital mark from the NOVA logo, used as the hero's visual anchor -->
+      <div class="hero-mark" aria-hidden="true">
+        <svg viewBox="0 0 220 220" fill="none" stroke="currentColor" stroke-width="1.25">
+          <ellipse cx="110" cy="110" rx="96" ry="42" transform="rotate(-24 110 110)" opacity=".55"/>
+          <ellipse cx="110" cy="110" rx="96" ry="42" transform="rotate(24 110 110)" opacity=".3"/>
+          <circle cx="110" cy="110" r="52" opacity=".45"/>
+          <path d="M110 76l7.5 20.5L138 104l-20.5 7.5L110 132l-7.5-20.5L82 104l20.5-7.5z" fill="currentColor" stroke="none"/>
+        </svg>
       </div>
     </div>
   </section>
 
-  <!-- ===================== FEATURED POST ===================== -->
+  <!-- ===================== FEATURED EDITORIAL ===================== -->
   <section class="section" aria-labelledby="featured-heading">
     <div class="container">
       <div class="section-head reveal">
         <div>
-          <h2 class="section-title" id="featured-heading">Featured</h2>
-          <p class="section-sub">The piece worth starting with.</p>
+          <h2 class="section-title" id="featured-heading">Featured Editorial</h2>
+          <p class="section-sub">The latest highlighted insight on technology and innovation.</p>
         </div>
       </div>
       <div id="featured-post"></div>
     </div>
   </section>
 
-  <!-- ===================== LATEST POSTS ===================== -->
+  <!-- ===================== LATEST ARTICLES ===================== -->
   <section class="section" aria-labelledby="latest-heading">
     <div class="container">
       <div class="section-head reveal">
         <div>
-          <h2 class="section-title" id="latest-heading">Latest Posts</h2>
-          <p class="section-sub">Recent writing from the journal.</p>
+          <h2 class="section-title" id="latest-heading">Latest Articles</h2>
+          <p class="section-sub">Development lessons, startup perspectives, and reflections.</p>
         </div>
-        <a class="read-link" href="blog.html">
-          View all posts
+      </div>
+
+      <div class="grid grid-3" id="latest-posts"></div>
+
+      <div class="load-more-wrap reveal">
+        <a class="btn btn-ghost" href="blog.html">
+          View All Articles
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
-      <div class="grid grid-3" id="latest-posts"></div>
     </div>
   </section>
 
-  <!-- ===================== CATEGORIES ===================== -->
+  <!-- ===================== EXPLORE OUR TOPICS ===================== -->
   <section class="section" aria-labelledby="topics-heading">
     <div class="container">
       <div class="section-head reveal">
         <div>
-          <h2 class="section-title" id="topics-heading">Browse by Topic</h2>
-          <p class="section-sub">Jump straight to what interests you.</p>
+          <h2 class="section-title" id="topics-heading">Explore Our Topics</h2>
+          <p class="section-sub">Six areas this journal keeps coming back to.</p>
         </div>
       </div>
-      <div class="chip-row reveal" id="category-chips"></div>
-    </div>
-  </section>
-
-  <!-- ===================== STATS ===================== -->
-  <section class="section" aria-labelledby="stats-heading">
-    <div class="container">
-      <h2 class="sr-only" id="stats-heading">Journal statistics</h2>
-      <div class="stats reveal" id="stats">
-        <div class="stat">
-          <span class="stat-num" data-stat="posts">0</span>
-          <span class="stat-label">Posts</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num" data-stat="categories">0</span>
-          <span class="stat-label">Categories</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num" data-stat="authors">0</span>
-          <span class="stat-label">Authors</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num" data-stat="topics">0</span>
-          <span class="stat-label">Topics</span>
-        </div>
-      </div>
+      <div class="topic-grid" id="topic-grid"></div>
     </div>
   </section>
 
@@ -170,16 +145,17 @@
     <div class="container">
       <div class="panel panel-gradient reveal">
         <div class="about-preview">
-          <img class="about-portrait" src="assets/images/author-avatar.jpg" alt="Portrait of Yongama, author of NOVA Journal" width="400" height="400" data-fallback="assets/images/fallback.jpg">
+          <span class="about-portrait monogram" aria-hidden="true">YG</span>
           <div>
-            <p class="eyebrow">About the author</p>
-            <h2 class="section-title" id="about-preview-heading">Written by Yongama</h2>
-            <p class="section-sub" style="font-size:var(--fs-sm); margin-bottom:var(--sp-4); max-width:56ch;">
-              Information Systems student and emerging technology entrepreneur based in the Eastern Cape, South Africa.
-              NOVA Journal is where I work through what I am learning about AI, building software, and starting things.
+            <p class="eyebrow">Who writes this</p>
+            <h2 class="section-title" id="about-preview-heading">Yongama Goso</h2>
+            <p class="section-sub" style="font-size:var(--fs-sm); margin-bottom:var(--sp-4); max-width:58ch;">
+              Information Systems student, developer and technology entrepreneur in South Africa.
+              I build websites, dashboards and database-backed applications, and I use NOVA Journal
+              to document what I learn along the way — including the parts that did not work.
             </p>
             <a class="btn btn-ghost btn-sm" href="about.html">
-              More about this project
+              Read more about the project
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
@@ -192,10 +168,10 @@
   <section class="section" aria-labelledby="newsletter-heading">
     <div class="container container-narrow">
       <div class="panel panel-gradient reveal" style="text-align:center;">
-        <p class="eyebrow" style="justify-content:center;">Stay in the loop</p>
-        <h2 class="section-title" id="newsletter-heading">Get new posts by email</h2>
-        <p class="section-sub" style="max-width:46ch; margin:var(--sp-2) auto 0;">
-          No spam, no tracking. Your address is stored only in this browser — this is a front-end demo.
+        <h2 class="section-title" id="newsletter-heading">Get new articles by email</h2>
+        <p class="section-sub" style="max-width:48ch; margin:var(--sp-2) auto 0;">
+          One message when something new is published. Your address is saved in this browser only —
+          there is no mailing list behind it yet, so treat this as a demonstration of the form.
         </p>
 
         <form class="newsletter-form" data-newsletter novalidate style="justify-content:center; max-width:460px; margin-inline:auto;">
@@ -218,9 +194,9 @@
     <div class="footer-grid">
       <div>
         <a href="index.html" class="footer-brand" aria-label="NOVA Journal — home">
-          <img src="assets/images/nova-journal-logo.png" alt="NOVA Journal" width="1053" height="476" data-fallback="assets/images/fallback.jpg">
+          <img src="assets/images/nova-journal-logo.png" alt="NOVA Journal" width="1053" height="476" loading="lazy" data-fallback="assets/images/fallback.jpg">
         </a>
-        <p class="footer-tagline">Ideas, technology and stories shaping the future — written from the Eastern Cape, South Africa.</p>
+        <p class="footer-tagline">A working journal on software, AI and entrepreneurship — written from the Eastern Cape, South Africa.</p>
       </div>
 
       <div class="footer-col">
@@ -241,7 +217,8 @@
           <li><a href="blog.html?category=Software%20Development">Software Development</a></li>
           <li><a href="blog.html?category=Entrepreneurship">Entrepreneurship</a></li>
           <li><a href="blog.html?category=Digital%20Innovation">Digital Innovation</a></li>
-          <li><a href="blog.html?category=Education">Education</a></li>
+          <li><a href="blog.html?category=Education%20and%20Skills">Education and Skills</a></li>
+          <li><a href="blog.html?category=Creative%20Technology">Creative Technology</a></li>
         </ul>
       </div>
 

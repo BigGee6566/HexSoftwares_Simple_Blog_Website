@@ -14,15 +14,26 @@
      HOME PAGE
      ====================================================================== */
 
+  /* NOVA.getFeaturedPost picks the newest post flagged `featured`, and falls
+     back to the newest post overall when nothing is flagged. */
   function renderFeatured(posts) {
     var host = UI.qs('#featured-post');
     if (!host) return;
     host.textContent = '';
+    host.removeAttribute('data-featured-id');
 
-    if (!posts.length) return;
+    if (!posts.length) {
+      host.appendChild(UI.emptyState({
+        icon: 'pen',
+        title: 'No featured story yet.',
+        message: 'Once you publish an article it will be highlighted here.',
+        actionLabel: 'Write the first article',
+        actionHref: 'create-post.html'
+      }));
+      return;
+    }
 
-    // Prefer an explicitly flagged post, else the newest one.
-    var featured = posts.filter(function (p) { return p.featured; })[0] || posts[0];
+    var featured = NOVA.getFeaturedPost(posts);
     host.appendChild(UI.featuredCard(featured));
     host.dataset.featuredId = featured.id;
   }
@@ -35,37 +46,36 @@
     if (!posts.length) {
       host.appendChild(UI.emptyState({
         icon: 'pen',
-        title: 'No posts yet',
-        message: 'Your journal is empty. Write the first entry and it will appear here straight away.',
-        actionLabel: 'Write your first post',
+        title: 'No articles published yet.',
+        message: 'Be the first to share an idea with NOVA Journal.',
+        actionLabel: 'Write the first article',
         actionHref: 'create-post.html'
       }));
       return;
     }
 
-    var featuredId = (UI.qs('#featured-post') || {}).dataset
-      ? UI.qs('#featured-post').dataset.featuredId : null;
+    // Skip whatever is already showing as the featured story, so the home
+    // page never repeats the same article twice.
+    var featuredHost = UI.qs('#featured-post');
+    var featuredId = featuredHost ? featuredHost.dataset.featuredId : null;
 
     var rest = posts.filter(function (p) { return p.id !== featuredId; }).slice(0, 3);
     if (!rest.length) rest = posts.slice(0, 3);
 
     rest.forEach(function (post) {
-      host.appendChild(UI.postCard(post, { showTools: false }));
+      host.appendChild(UI.postCard(post, { showBookmark: true }));
     });
   }
 
-  function renderCategoryChips(posts) {
-    var host = UI.qs('#category-chips');
+  /* "Explore Our Topics" — topic cards carry a description and a live count,
+     which is a different shape from an article card on purpose. */
+  function renderTopics(posts) {
+    var host = UI.qs('#topic-grid');
     if (!host) return;
     host.textContent = '';
 
-    NOVA.CATEGORIES.forEach(function (cat) {
-      var count = posts.filter(function (p) { return p.category === cat; }).length;
-      var chip = UI.el('a', 'chip');
-      chip.href = 'blog.html?category=' + encodeURIComponent(cat);
-      chip.appendChild(document.createTextNode(cat));
-      chip.appendChild(UI.el('span', 'count', String(count)));
-      host.appendChild(chip);
+    NOVA.CATEGORY_INFO.forEach(function (info) {
+      host.appendChild(UI.topicCard(info, NOVA.countByCategory(posts, info.name)));
     });
   }
 
@@ -95,18 +105,16 @@
     });
   }
 
+  /* Each section renders only if its container exists, so this is safe to run
+     on any page that includes some (About reuses #topic-grid and #stats). */
   function initHome() {
-    var isHome = UI.qs('#featured-post') || UI.qs('#latest-posts');
-    // #stats and #category-chips also appear on other pages (e.g. About),
-    // so they are rendered whenever present — not only on the home page.
-    if (!isHome && !UI.qs('#stats') && !UI.qs('#category-chips')) return;
+    if (!UI.qs('#featured-post') && !UI.qs('#latest-posts') &&
+        !UI.qs('#topic-grid') && !UI.qs('#stats')) return;
 
     var posts = NOVA.sortNewestFirst(NOVA.ensurePosts());
-    if (isHome) {
-      renderFeatured(posts);
-      renderLatest(posts);
-    }
-    renderCategoryChips(posts);
+    renderFeatured(posts);
+    renderLatest(posts);
+    renderTopics(posts);
     renderStats(posts);
     UI.initScrollAnimations();
   }
@@ -117,9 +125,14 @@
 
   function filterAndSortPosts(posts, state) {
     var term = state.search.trim().toLowerCase();
+    var saved = state.category === 'bookmarks' ? NOVA.getBookmarks() : null;
 
     var filtered = posts.filter(function (p) {
-      if (state.category !== 'all' && p.category !== state.category) return false;
+      if (saved) {
+        if (saved.indexOf(p.id) === -1) return false;
+      } else if (state.category !== 'all' && p.category !== state.category) {
+        return false;
+      }
       if (!term) return true;
       var haystack = [p.title, p.excerpt, p.content, p.author, p.category, p.tags.join(' ')]
         .join(' ').toLowerCase();
@@ -166,17 +179,27 @@
       if (!filterHost) return;
       filterHost.textContent = '';
 
-      var options = [{ label: 'All', value: 'all' }].concat(
-        NOVA.CATEGORIES.map(function (c) { return { label: c, value: c }; })
-      );
+      var savedIds = NOVA.getBookmarks();
+
+      var options = [{ label: 'All', value: 'all' }]
+        .concat(NOVA.CATEGORIES.map(function (c) { return { label: c, value: c }; }))
+        .concat([{ label: 'Saved', value: 'bookmarks' }]);
 
       options.forEach(function (opt) {
-        var count = opt.value === 'all'
-          ? posts.length
-          : posts.filter(function (p) { return p.category === opt.value; }).length;
+        var count;
+        if (opt.value === 'all') count = posts.length;
+        else if (opt.value === 'bookmarks') {
+          count = posts.filter(function (p) { return savedIds.indexOf(p.id) > -1; }).length;
+        } else {
+          count = posts.filter(function (p) { return p.category === opt.value; }).length;
+        }
 
-        var chip = UI.el('button', 'chip');
+        var chip = UI.el('button', 'chip' + (opt.value === 'bookmarks' ? ' chip-saved' : ''));
         chip.type = 'button';
+        if (opt.value === 'bookmarks') {
+          chip.appendChild(UI.icon('bookmark'));
+          chip.setAttribute('aria-label', 'Show saved articles (' + count + ')');
+        }
         chip.setAttribute('aria-pressed', state.category === opt.value ? 'true' : 'false');
         chip.appendChild(document.createTextNode(opt.label));
         chip.appendChild(UI.el('span', 'count', String(count)));
@@ -187,9 +210,10 @@
           UI.qsa('.chip', filterHost).forEach(function (c) { c.setAttribute('aria-pressed', 'false'); });
           chip.setAttribute('aria-pressed', 'true');
           render();
-          // Keep the URL shareable
+          // Keep the URL shareable. "Saved" is per-browser, so it is not
+          // something worth putting in a link.
           var url = new URL(window.location.href);
-          if (opt.value === 'all') url.searchParams.delete('category');
+          if (opt.value === 'all' || opt.value === 'bookmarks') url.searchParams.delete('category');
           else url.searchParams.set('category', opt.value);
           window.history.replaceState({}, '', url);
         });
@@ -209,9 +233,12 @@
         countNode.textContent = '';
         var strong = UI.el('strong', null, String(results.length));
         countNode.appendChild(strong);
+        var scope = '';
+        if (state.category === 'bookmarks') scope = ' saved';
+        else if (state.category !== 'all') scope = ' in ' + state.category;
+
         countNode.appendChild(document.createTextNode(
-          ' ' + (results.length === 1 ? 'post' : 'posts') +
-          (state.category !== 'all' ? ' in ' + state.category : '') +
+          ' ' + (results.length === 1 ? 'article' : 'articles') + scope +
           (state.search.trim() ? ' matching “' + state.search.trim() + '”' : '')
         ));
       }
@@ -229,12 +256,19 @@
       }
 
       if (!results.length) {
+        var emptyMessage;
+        if (state.search.trim()) {
+          emptyMessage = 'Nothing matches “' + state.search.trim() + '”. Try a different word, or clear the filters.';
+        } else if (state.category === 'bookmarks') {
+          emptyMessage = 'You have not saved any articles yet. Use the bookmark button on a card to keep it here.';
+        } else {
+          emptyMessage = 'There are no articles in this topic yet.';
+        }
+
         list.appendChild(UI.emptyState({
-          icon: 'search',
-          title: 'No matching posts',
-          message: state.search.trim()
-            ? 'Nothing matches “' + state.search.trim() + '”. Try a different word, or clear the filters.'
-            : 'There are no posts in this category yet.',
+          icon: state.category === 'bookmarks' ? 'bookmark' : 'search',
+          title: state.category === 'bookmarks' ? 'No saved articles' : 'No posts match your search',
+          message: emptyMessage,
           actionLabel: 'Clear filters',
           actionHref: 'blog.html'
         }));
@@ -245,7 +279,12 @@
       results.slice(0, state.visible).forEach(function (post) {
         list.appendChild(UI.postCard(post, {
           showTools: true,
-          onDelete: function () { render(); }
+          onDelete: function () { render(); },
+          // In the Saved view, un-bookmarking should drop the card immediately.
+          onBookmark: function () {
+            if (state.category === 'bookmarks') render();
+            else buildFilters(NOVA.getPosts());
+          }
         }));
       });
 
@@ -271,6 +310,18 @@
           state.visible = PAGE_SIZE;
           render();
         }, 180);
+      });
+    }
+
+    /* Press "/" anywhere on the listing to jump to the search box. */
+    if (searchInput) {
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+        var tag = (document.activeElement && document.activeElement.tagName) || '';
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
       });
     }
 
@@ -536,6 +587,13 @@
     document.title = post.title + ' — NOVA Journal';
     var metaDesc = UI.qs('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', NOVA.truncate(post.excerpt, 155));
+
+    /* Breadcrumbs — Home / Blog / Topic / this article */
+    var crumbHost = UI.qs('#article-breadcrumbs');
+    if (crumbHost) {
+      crumbHost.textContent = '';
+      crumbHost.appendChild(UI.buildBreadcrumbs(post));
+    }
 
     /* Header */
     var badgeHost = UI.qs('#article-category');
