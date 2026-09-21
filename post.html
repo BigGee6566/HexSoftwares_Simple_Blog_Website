@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog Posts — NOVA Journal</title>
-<meta name="description" content="Every article on NOVA Journal. Search, filter by category and sort posts on AI, software development, entrepreneurship, innovation, education and media.">
+<title>Post — NOVA Journal</title>
+<meta name="description" content="Read a full article on NOVA Journal.">
 <link rel="icon" href="assets/images/favicon.png" type="image/png">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/responsive.css">
@@ -24,7 +24,7 @@
 </script>
 </head>
 <body>
-
+<div class="read-progress" role="presentation"></div>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- ===================== HEADER ===================== -->
@@ -64,58 +64,126 @@
 
 <main id="main">
 
-  <section class="section">
-    <div class="container">
-
-      <div class="section-head reveal">
-        <div>
-          <p class="eyebrow">The archive</p>
-          <h1 class="section-title" style="font-size:var(--fs-2xl);">All Posts</h1>
-          <p class="section-sub">Everything published on NOVA Journal, newest first. Search, filter by topic, or sort to find what you need.</p>
+  <!-- Shown when the ?id= parameter matches no stored post -->
+  <section class="section" id="article-missing" hidden>
+    <div class="container container-narrow">
+      <div class="empty-state">
+        <div class="art">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.3v.2"/></svg>
         </div>
-        <a class="btn btn-primary" href="create-post.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 10-10-3-3L5 16z"/><path d="M14 6l3 3"/></svg>
-          Add New Post
-        </a>
+        <h1>Post not found</h1>
+        <p>This post may have been deleted from this browser, or the link is incorrect.</p>
+        <a class="btn btn-primary" href="blog.html">Back to all posts</a>
       </div>
-
-      <!-- Search / sort toolbar -->
-      <div class="toolbar reveal">
-        <div class="toolbar-row">
-          <div class="search-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-            <label class="sr-only" for="search-input">Search posts</label>
-            <input type="search" id="search-input" placeholder="Search posts, authors or tags…" autocomplete="off">
-          </div>
-        </div>
-        <div class="toolbar-row" style="flex:0 0 auto;">
-          <div class="select-wrap">
-            <label class="sr-only" for="sort-select">Sort posts</label>
-            <select id="sort-select">
-              <option value="newest">Newest first</option>
-              <option value="oldest">Oldest first</option>
-              <option value="az">Title A–Z</option>
-              <option value="za">Title Z–A</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Category filter chips -->
-      <h2 class="sr-only">Filter by category</h2>
-      <div class="chip-row reveal" id="category-filters" role="group" aria-label="Filter posts by category" style="margin-bottom:var(--sp-5);"></div>
-
-      <p class="result-count" id="result-count" role="status" aria-live="polite" style="margin-bottom:var(--sp-5);"></p>
-
-      <h2 class="sr-only">Posts</h2>
-      <div class="grid grid-3" id="post-list"></div>
-
-      <div class="load-more-wrap" id="load-more-wrap" hidden>
-        <button class="btn btn-ghost btn-lg" type="button" id="load-more">Load more</button>
-      </div>
-
     </div>
   </section>
+
+  <article id="article-root">
+    <div id="article-content">
+
+      <!-- Header -->
+      <section class="section" style="padding-bottom:0;">
+        <div class="container container-narrow">
+          <!-- Breadcrumbs replace the old "back" link: same navigation, more context -->
+          <div id="article-breadcrumbs"></div>
+
+          <header class="article-head">
+            <div id="article-category"></div>
+            <h1 class="article-title" id="article-title">Loading…</h1>
+            <p class="hero-sub" id="article-excerpt" style="font-size:var(--fs-md); margin:0;"></p>
+          </header>
+
+          <div class="article-byline">
+            <div class="author-row">
+              <span class="avatar avatar-lg" id="article-avatar" aria-hidden="true">NJ</span>
+              <div>
+                <div class="byline-name" id="article-author"></div>
+                <div class="byline-bio" id="article-bio"></div>
+              </div>
+            </div>
+            <div id="article-meta"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cover -->
+      <section style="padding-bottom:0;">
+        <div class="container container-narrow">
+          <div class="article-cover" id="article-cover"></div>
+        </div>
+      </section>
+
+      <!-- Body -->
+      <section style="padding-top:0;">
+        <div class="container container-narrow">
+          <div class="article-body" id="article-body"></div>
+
+          <div class="tag-list" id="article-tags" style="margin-top:var(--sp-6);"></div>
+
+          <!-- Share + bookmark -->
+          <div class="share-row">
+            <span class="label">Share</span>
+            <div id="share-row" style="display:flex; gap:var(--sp-2); flex-wrap:wrap;"></div>
+            <button class="btn btn-ghost btn-sm" type="button" id="bookmark-btn" aria-pressed="false" style="margin-left:auto;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12v16l-6-4.2L6 20z"/></svg>
+              <span class="bm-label">Bookmark</span>
+            </button>
+          </div>
+
+          <!-- Previous / next -->
+          <h2 class="sr-only">Continue reading</h2>
+          <nav class="prevnext" id="prev-next" aria-label="Previous and next posts"></nav>
+        </div>
+      </section>
+
+      <!-- Comments -->
+      <section class="section" aria-labelledby="responses-heading">
+        <div class="container container-narrow">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title" id="responses-heading">Responses</h2>
+              <p class="section-sub" id="comment-count">No responses yet</p>
+            </div>
+          </div>
+
+          <form id="comment-form" class="panel" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label class="field-label" for="comment-name">Your name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="comment-name" name="name" maxlength="50" placeholder="Who is responding?" required>
+                <p class="field-error">Please enter your name.</p>
+              </div>
+              <div class="field">
+                <label class="field-label" for="comment-message">Your response <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="comment-message" name="message" maxlength="600" placeholder="Share your thoughts on this post…" required></textarea>
+                <p class="field-error">Please write a response.</p>
+                <p class="field-hint">Responses are stored in your browser only — nothing is sent to a server.</p>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Post response</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="comment-list" id="comment-list"></div>
+        </div>
+      </section>
+
+      <!-- Related -->
+      <section class="section" id="related-section" aria-labelledby="related-heading">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <h2 class="section-title" id="related-heading">Related Posts</h2>
+              <p class="section-sub">More from the journal.</p>
+            </div>
+          </div>
+          <div class="grid grid-3" id="related-posts"></div>
+        </div>
+      </section>
+
+    </div>
+  </article>
 
 </main>
 

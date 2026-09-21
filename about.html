@@ -1,61 +1,288 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — HexSoftwares Blog</title>
-  <meta name="description" content="About this blog project and the Hex Softwares Web Development Internship.">
-  <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — NOVA Journal</title>
+<meta name="description" content="About NOVA Journal and its author: why the blog exists, what it was built with, and what was learned building it for the Hex Softwares Web Development Internship.">
+<link rel="icon" href="assets/images/favicon.png" type="image/png">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script>
+/* Apply the saved theme before first paint so there is no colour flash. */
+(function () {
+  try {
+    var raw = localStorage.getItem('hexsoftwares_theme');
+    var t = raw ? JSON.parse(raw) : null;
+    if (t !== 'light' && t !== 'dark') {
+      t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+    }
+    document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { /* keep the dark default */ }
+  document.documentElement.classList.add('js');
+})();
+</script>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="index.html" class="logo">Hex<span class="dot">.</span>Blog</a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="NOVA Journal — home">
+      <img src="assets/images/nova-journal-logo.png" alt="NOVA Journal" width="1053" height="476" data-fallback="assets/images/fallback.jpg">
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <ul>
+        <li><a class="nav-link" href="index.html" data-page="index.html">Home</a></li>
+        <li><a class="nav-link" href="blog.html" data-page="blog.html post.html">Blog Posts</a></li>
+        <li><a class="nav-link" href="about.html" data-page="about.html">About</a></li>
+        <li><a class="nav-link" href="contact.html" data-page="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="create-post.html">Write a Post</a>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-icon theme-toggle" type="button" aria-label="Switch theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 019.5 4 8.3 8.3 0 1020 14.5z"/></svg>
       </button>
-      <nav class="site-nav" aria-label="Primary">
-        <button class="nav-close" aria-label="Close menu">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
+
+      <a class="btn btn-primary btn-sm btn-cta" href="create-post.html">Write a Post</a>
+
+      <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-nav">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <div>
+          <p class="masthead">NOVA Journal — Eastern Cape, South Africa</p>
+          <h1 class="section-title" style="font-size:var(--fs-2xl);">About NOVA Journal</h1>
+        </div>
+      </div>
+
+      <div class="about-layout">
+        <div>
+
+          <!-- Introduction -->
+          <div class="article-body reveal" style="max-width:none;">
+            <p>NOVA Journal is a technology and creativity blog created by <strong>Yongama Goso</strong>, an Information Systems student, emerging software developer, and technology entrepreneur from South Africa.</p>
+            <p>The blog explores the ideas, tools, and stories shaping technology, business, education, and digital creativity. It focuses on practical, accessible writing about artificial intelligence, software development, entrepreneurship, innovation, skills development, and the changing digital world.</p>
+            <p>It was created as a space to document learning, share useful insights, discuss new ideas, and show practical projects — combining technology with creativity to make complex topics easier to understand for students, entrepreneurs, developers, and curious learners.</p>
+            <p>The name <strong>NOVA</strong> refers to a sudden burst of light: a bright new beginning. The journal aims to highlight new ideas and encourage people to explore what they can build in the digital age.</p>
+          </div>
+
+          <!-- Mission & Vision -->
+          <h2 class="section-title" style="margin:var(--sp-7) 0 var(--sp-4);">Mission and vision</h2>
+          <div class="grid grid-2">
+            <div class="panel reveal">
+              <h3 class="topic-name" style="margin-bottom:var(--sp-3);">Mission</h3>
+              <p class="section-sub" style="margin:0;">To make technology, innovation, and entrepreneurship easier to understand and more accessible to students, creators, developers, and emerging business builders — encouraging practical learning, creative thinking, and responsible use of technology to solve real-world problems.</p>
+            </div>
+            <div class="panel reveal">
+              <h3 class="topic-name" style="margin-bottom:var(--sp-3);">Vision</h3>
+              <p class="section-sub" style="margin:0;">To become a trusted digital space where ideas, technology, and creativity come together to inspire learning, innovation, and meaningful opportunities.</p>
+            </div>
+          </div>
+
+          <!-- Topics -->
+          <h2 class="section-title" style="margin:var(--sp-7) 0 var(--sp-4);">Explore Our Topics</h2>
+          <div class="topic-grid" id="topic-grid"></div>
+
+          <!-- About Yongama -->
+          <h2 class="section-title" style="margin:var(--sp-7) 0 var(--sp-4);">About Yongama</h2>
+          <div class="article-body reveal" style="max-width:none;">
+            <p>I am an Information Systems student, emerging software developer, and technology entrepreneur from South Africa. I am interested in using technology, artificial intelligence, and digital innovation to solve practical problems and create opportunities for individuals, businesses, and communities.</p>
+            <p>My work combines software development, business development, education, and creative digital projects. I enjoy building websites, dashboards, booking systems, database-backed applications, and AI-assisted tools that make information and services easier to access.</p>
+            <p>I am currently developing my skills in HTML, CSS, JavaScript, C#, ASP.NET, SQL, PostgreSQL, MySQL, responsive design, and AI-assisted software development. I also use digital tools to research ideas, plan businesses, and create educational resources.</p>
+            <p>Beyond coding, I am interested in entrepreneurship, innovation hubs, youth development, digital skills training, content creation, graphic design, and the future of artificial intelligence. I believe technology should be practical, accessible, and relevant to the communities it serves.</p>
+            <p>NOVA Journal is where I share ideas, projects, lessons, and experiments. It documents my growth as a student, developer, and lifelong learner.</p>
+          </div>
+
+          <!-- Skills -->
+          <h2 class="section-title" style="margin:var(--sp-7) 0 var(--sp-4);">What I work with</h2>
+          <dl class="skill-list reveal">
+            <div class="skill-row">
+              <dt>HTML5</dt>
+              <dd>Semantic page structure and accessible web content</dd>
+            </div>
+            <div class="skill-row">
+              <dt>CSS3</dt>
+              <dd>Responsive layouts, animations, design systems, and modern UI styling</dd>
+            </div>
+            <div class="skill-row">
+              <dt>JavaScript</dt>
+              <dd>Interactive interfaces, forms, filters, localStorage, and browser APIs</dd>
+            </div>
+            <div class="skill-row">
+              <dt>C# and ASP.NET</dt>
+              <dd>Database-backed applications and business systems</dd>
+            </div>
+            <div class="skill-row">
+              <dt>SQL and databases</dt>
+              <dd>Data modelling, queries, PostgreSQL, MySQL, and application integration</dd>
+            </div>
+            <div class="skill-row">
+              <dt>Artificial intelligence</dt>
+              <dd>AI-assisted development, prompt engineering, research, and workflow automation</dd>
+            </div>
+            <div class="skill-row">
+              <dt>Business development</dt>
+              <dd>Idea validation, business planning, innovation programmes, and digital strategy</dd>
+            </div>
+          </dl>
+
+          <!-- How it was built -->
+          <div class="article-body reveal" style="max-width:none; margin-top:var(--sp-7);">
+            <h2>How the website was built</h2>
+            <p>NOVA Journal is a front-end website built with HTML5, CSS3, and vanilla JavaScript. It uses <code>localStorage</code> to store blog posts, bookmarks, comments, newsletter sign-ups, and contact messages in the browser. The <code>FileReader</code> API handles featured-image uploads, which are resized on a <code>&lt;canvas&gt;</code> and stored as Base64 data — so images work without a backend or database.</p>
+            <p>The project demonstrates responsive design, page navigation, form validation, image handling, search, category filtering, sorting, dark mode, dynamic content rendering, and accessible interface design.</p>
+
+            <h2>Key features</h2>
+            <ul>
+              <li>Dynamic featured editorial and latest-articles feed on the home page</li>
+              <li>Search, topic filtering, sorting, saved bookmarks, and load-more pagination</li>
+              <li>A full create-post editor with live preview, validation, and image compression</li>
+              <li>Single-article view with breadcrumbs, reading progress, sharing, and comments</li>
+              <li>Dark and light themes with the preference remembered between visits</li>
+              <li>Graceful behaviour when storage is full, blocked, or an image fails to load</li>
+            </ul>
+
+            <h2>Project purpose</h2>
+            <p>NOVA Journal was developed for the <strong>Hex Softwares Web Development Internship — Task 1</strong>. It demonstrates planning, designing, developing, and improving a complete blog website using core front-end technologies.</p>
+            <p>It also represents my growth as an Information Systems student and developer: it let me practise interface design, JavaScript functionality, browser storage, responsive layouts, accessibility, and user-experience decisions.</p>
+          </div>
+
+          <!-- CTAs -->
+          <div class="panel panel-gradient reveal" style="margin-top:var(--sp-7);">
+            <h2 class="section-title" style="font-size:var(--fs-lg); margin-bottom:var(--sp-2);">Have something to share?</h2>
+            <p class="section-sub" style="margin-bottom:var(--sp-5);">Have an idea, project, or perspective to share? Explore the latest articles, create your own post, or get in touch.</p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="blog.html">Read the Blog</a>
+              <a class="btn btn-ghost" href="create-post.html">Create a Post</a>
+              <a class="btn btn-ghost" href="contact.html">Get in Touch</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="about-aside">
+          <div class="panel reveal" style="margin-bottom:var(--sp-4);">
+            <span class="about-portrait monogram" aria-hidden="true">YG</span>
+            <h2 class="topic-name" style="margin-bottom:var(--sp-1);">Yongama Goso</h2>
+            <p class="field-hint">Information Systems student, developer and technology entrepreneur — Eastern Cape, South Africa.</p>
+          </div>
+
+          <div class="stats reveal" id="stats" style="grid-template-columns:repeat(2,1fr); margin-bottom:var(--sp-4);">
+            <div class="stat">
+              <span class="stat-num" data-stat="posts">0</span>
+              <span class="stat-label">Articles</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num" data-stat="categories">0</span>
+              <span class="stat-label">Topics</span>
+            </div>
+          </div>
+
+          <div class="panel reveal">
+            <h2 class="topic-name" style="margin-bottom:var(--sp-3);">Built with</h2>
+            <div class="tag-list">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">localStorage</span>
+              <span class="tag">FileReader</span>
+              <span class="tag">Canvas</span>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="footer-brand" aria-label="NOVA Journal — home">
+          <img src="assets/images/nova-journal-logo.png" alt="NOVA Journal" width="1053" height="476" loading="lazy" data-fallback="assets/images/fallback.jpg">
+        </a>
+        <p class="footer-tagline">A working journal on software, AI and entrepreneurship — written from the Eastern Cape, South Africa.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explore</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="blog.html">Blog Posts</a></li>
-          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="create-post.html">Write a Post</a></li>
         </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main>
-    <h1 class="page-title">About This Project</h1>
-
-    <div class="prose">
-      <p>This blog was built as <strong>Task 1</strong> of the <strong>Hex Softwares Web Development Internship</strong>. The goal was to create a responsive, multi-page blog website using only HTML, CSS, and vanilla JavaScript &mdash; no frameworks, no libraries, no build tools.</p>
-
-      <div class="highlight-box">
-        <p>Four pages, one shared stylesheet, one script file, and localStorage for persistence. That is the entire stack.</p>
       </div>
 
-      <p>The site consists of four pages linked together through a shared navigation bar: a <strong>Home</strong> page with a hero section and the three most recent posts, a <strong>Blog Posts</strong> page where you can read all entries and publish new ones, this <strong>About</strong> page, and a <strong>Contact</strong> page with a client-side validated form.</p>
+      <div class="footer-col">
+        <h4>Topics</h4>
+        <ul>
+          <li><a href="blog.html?category=Artificial%20Intelligence">Artificial Intelligence</a></li>
+          <li><a href="blog.html?category=Software%20Development">Software Development</a></li>
+          <li><a href="blog.html?category=Entrepreneurship">Entrepreneurship</a></li>
+          <li><a href="blog.html?category=Digital%20Innovation">Digital Innovation</a></li>
+          <li><a href="blog.html?category=Education%20and%20Skills">Education and Skills</a></li>
+          <li><a href="blog.html?category=Creative%20Technology">Creative Technology</a></li>
+        </ul>
+      </div>
 
-      <p>Blog posts are stored in the browser using <code>localStorage</code>. That means posts persist across page reloads within the same browser, but they are not shared across devices or sent to any server. If localStorage is empty on first visit, three sample posts are seeded automatically so the page is never blank.</p>
-
-      <p>The design follows a teal-and-cream colour palette with the DM Serif Display typeface for headings and Outfit for body text. It is fully responsive, adapting from mobile to desktop with a hamburger menu on smaller screens.</p>
-
-      <p>Built by <strong>Yongama</strong>, a student at the University of Fort Hare, Eastern Cape, South Africa.</p>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <div class="social-row">
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.4a9.6 9.6 0 00-3 18.7c.5.1.6-.2.6-.5v-1.7c-2.6.6-3.2-1.2-3.2-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.1-.2-4.3-1-4.3-4.6 0-1 .4-1.9 1-2.5-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.6 1a9 9 0 014.8 0c1.8-1.3 2.6-1 2.6-1 .5 1.3.2 2.3.1 2.6.6.6 1 1.5 1 2.5 0 3.6-2.2 4.4-4.3 4.6.3.3.6.9.6 1.8v2.7c0 .3.2.6.7.5A9.6 9.6 0 0012 2.4z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M7.5 10.5V17M7.5 7.6v.1M11.5 17v-3.6a2 2 0 014 0V17"/></svg>
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4l16 16M20 4L4 20"/></svg>
+          </a>
+          <a href="contact.html" aria-label="Contact page">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <p>&copy; 2026 Hex Softwares Web Development Internship &mdash; Task 1</p>
-  </footer>
+    <div class="footer-bottom">
+      <p>&copy; 2026 NOVA Journal — Hex Softwares Web Development Internship — Task 1</p>
+      <p>Built with HTML5, CSS3 &amp; Vanilla JavaScript</p>
+    </div>
+  </div>
+</footer>
 
-  <script src="js/app.js"></script>
+<button class="scroll-top" type="button" aria-label="Scroll back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/blog.js"></script>
 </body>
 </html>
